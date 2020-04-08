@@ -1,2 +1,2 @@
-ALTER TABLE `pexcard_action` ADD `last_name` VARCHAR(10) NOT NULL DEFAULT '';
-ALTER TABLE `pexcard_action` ADD `card_number` int NOT NULL DEFAULT '0';
+ALTER TABLE `pexcard_action` ADD COLUMN IF NOT EXISTS `last_name` VARCHAR(10) NOT NULL DEFAULT '';
+ALTER TABLE `pexcard_action` ADD COLUMN IF NOT EXISTS `card_number` int NOT NULL DEFAULT '0';

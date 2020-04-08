@@ -1,4 +1,4 @@
-FROM php:7.0-fpm
+FROM php:7.0.20-fpm
 
 ENV DOCKER=1
 
