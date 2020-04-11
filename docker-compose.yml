@@ -16,6 +16,7 @@ services:
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
      - HOSTNAME=lieferfrass.dev
      - COCKPIT_HOSTNAME=cockpit.lieferfrass.dev
+     - GOOGLE_MAPS_API_KEY=AIzaSyDNJ0f3yxbeksuiQh0iG1_drBO1Mmhg_oo
     cap_add:
      - SYS_ADMIN
     command: >
@@ -24,6 +25,7 @@ services:
                mkdir -p /tmp/overlay/{upper,work} &&
                mkdir -p /app &&
                mount -t overlay overlay -o lowerdir=/baseapp,upperdir=/tmp/overlay/upper,workdir=/tmp/overlay/work /app &&
+               find /app -type f -exec sed -i -e "s/AIzaSyDNJ0f3yxbeksuiQh0iG1_drBO1Mmhg_Bg/$${GOOGLE_MAPS_API_KEY}/g" {} \; &&
                find /app -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
                find /etc/nginx -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
                find /app -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
@@ -56,6 +58,7 @@ services:
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
      - HOSTNAME=lieferfrass.dev
      - COCKPIT_HOSTNAME=cockpit.lieferfrass.dev
+     - GOOGLE_MAPS_API_KEY=AIzaSyDNJ0f3yxbeksuiQh0iG1_drBO1Mmhg_oo
     cap_add:
      - SYS_ADMIN
     command: >
@@ -64,6 +67,7 @@ services:
                mkdir -p /tmp/overlay/{upper,work} &&
                mkdir -p /app &&
                mount -t overlay overlay -o lowerdir=/baseapp,upperdir=/tmp/overlay/upper,workdir=/tmp/overlay/work /app &&
+               find /app -type f -exec sed -i -e "s/AIzaSyDNJ0f3yxbeksuiQh0iG1_drBO1Mmhg_Bg/$${GOOGLE_MAPS_API_KEY}/g" {} \; &&
                find /app -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
                find /etc/nginx -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
                find /app -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
