@@ -1,46 +1,92 @@
-crunchbutton:
-  build: .
-  ports:
-   - "8000:80"
-  links:
-   - crunchbutton-db-dev
-  environment:
-   - DEBUG=1
-   - COMPOSE=1
-   - ENV=DOCKER
-   - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
-  command: bash -c "sleep 60 && /app/cli/build.sh && nginx && php-fpm"
-  hostname: crunchbutton
-  restart: unless-stopped
-  
-cockpit:
-  build: .
-  ports:
-   - "8001:80"
-  links:
-   - crunchbutton-db-dev
-  environment:
-   - DEBUG=1
-   - COMPOSE=1
-   - ENV=DOCKER
-   - THEME=cockpit2
-   - ADMIN_LOGIN=admin
-   - ADMIN_PASSWORD=admin
-   - ADMIN_PHONE=12345
-   - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
-  command: bash -c "sleep 60 && /app/cli/build.sh && cd /app && php cli/install.php && nginx && php-fpm"
-  hostname: cockpit
-  restart: unless-stopped
+version: "3.7"
 
-crunchbutton-db-dev:
-  build: db
-  environment:
-   - MYSQL_ROOT_PASSWORD=root
-   - MYSQL_ROOT_USER=root
-   - MYSQL_USER=admin
-   - MYSQL_PASS=pass
-   - MYSQL_DATABASE=crunchbutton
-  ports:
-   - "3306:3306"
-  hostname: crunchbutton-db-dev
-  restart: unless-stopped
+services:
+  crunchbutton:
+    build: .
+    volumes:
+     - .:/baseapp:ro
+    ports:
+     - "8000:80"
+    links:
+     - crunchbutton-db-dev
+    environment:
+#     - DEBUG=1
+     - COMPOSE=1
+     - ENV=DOCKER
+     - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
+     - HOSTNAME=lieferfrass.dev
+     - COCKPIT_HOSTNAME=cockpit.lieferfrass.dev
+    cap_add:
+     - SYS_ADMIN
+    command: >
+      bash -c "mkdir -p /tmp/overlay &&
+               mount -t tmpfs tmpfs /tmp/overlay &&
+               mkdir -p /tmp/overlay/{upper,work} &&
+               mkdir -p /app &&
+               mount -t overlay overlay -o lowerdir=/baseapp,upperdir=/tmp/overlay/upper,workdir=/tmp/overlay/work /app &&
+               find /app -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
+               find /etc/nginx -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
+               find /app -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
+               find /etc/nginx -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
+               sleep 65 &&
+               cd /app &&
+               bash build.sh &&
+               bash cli/build.sh &&
+               nginx &&
+               php-fpm"
+    hostname: crunchbutton
+    restart: unless-stopped
+    
+  cockpit:
+    build: .
+    volumes:
+     - .:/baseapp:ro
+    ports:
+     - "8001:80"
+    links:
+     - crunchbutton-db-dev
+    environment:
+#     - DEBUG=1
+     - COMPOSE=1
+     - ENV=DOCKER
+     - THEME=cockpit2
+     - ADMIN_LOGIN=admin
+     - ADMIN_PASSWORD=admin
+     - ADMIN_PHONE=12345
+     - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
+     - HOSTNAME=lieferfrass.dev
+     - COCKPIT_HOSTNAME=cockpit.lieferfrass.dev
+    cap_add:
+     - SYS_ADMIN
+    command: >
+      bash -c "mkdir -p /tmp/overlay &&
+               mount -t tmpfs tmpfs /tmp/overlay &&
+               mkdir -p /tmp/overlay/{upper,work} &&
+               mkdir -p /app &&
+               mount -t overlay overlay -o lowerdir=/baseapp,upperdir=/tmp/overlay/upper,workdir=/tmp/overlay/work /app &&
+               find /app -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
+               find /etc/nginx -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
+               find /app -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
+               find /etc/nginx -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
+               sleep 60 &&
+               cd /app &&
+               bash build.sh &&
+               bash cli/build.sh &&
+               php cli/install.php &&
+               nginx &&
+               php-fpm"
+    hostname: cockpit
+    restart: unless-stopped
+  
+  crunchbutton-db-dev:
+    build: db
+    environment:
+     - MYSQL_ROOT_PASSWORD=root
+     - MYSQL_ROOT_USER=root
+     - MYSQL_USER=admin
+     - MYSQL_PASS=pass
+     - MYSQL_DATABASE=crunchbutton
+    ports:
+     - "3306:3306"
+    hostname: crunchbutton-db-dev
+    restart: unless-stopped
