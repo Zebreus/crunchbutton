@@ -1,12 +1,12 @@
 <div ng-if="( restaurant._open || restaurant.force_pre_order )">
 
 	<div ng-if="order.info.deliveryMinDiff && order.cart.hasItems()" class="dialog-message dialog-message-error delivery-minimum-error">
-		Add <sup>$</sup><span class="delivery-min-diff">{{order.info.deliveryMinDiff}}</span> more to meet the delivery min
+		Füge noch <sup>$</sup><span class="delivery-min-diff">{{order.info.deliveryMinDiff}}</span> um die Mindestsumme zu erreichen
 	</div>
 
 	<div ng-if="order.cart.hasItems()">
 		<div class="restaurant-title-wrap">
-			<div class="restaurant-title">The Order</div>
+			<div class="restaurant-title">Deine Bestellung</div>
 		</div>
 	</div>
 
@@ -15,7 +15,7 @@
 
 		<div class="cart-item">
 
-			<div ng-if="item.details.customization.customizable" ng-click="item.details.customization.expanded=!item.details.customization.expanded" class="cart-item-config">Customize</div>
+			<div ng-if="item.details.customization.customizable" ng-click="item.details.customization.expanded=!item.details.customization.expanded" class="cart-item-config">Anpassen</div>
 
 			<div class="cart-button cart-button-remove" ng-click="order.cart.remove(item.details.id);"><span class="fa fa-times-circle"></span></div>
 
@@ -66,6 +66,6 @@
 
 <div class="default-order-check" ng-if="order.info.totalItems && ( restaurant._open || restaurant.force_pre_order )">
 	<input custom-checkbox type="checkbox" ng-model="order.form.make_default">
-	<a ng-click="order.form.make_default = !order.form.make_default;">Save this order for next time</a>
+	<a ng-click="order.form.make_default = !order.form.make_default;">Speicher diese Bestellung fürs nächste mal</a>
 	<div class="divider"></div>
 </div>
