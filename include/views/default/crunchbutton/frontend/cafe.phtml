@@ -13,6 +13,7 @@
 				<br>
 				<div class="cafe-logo-clean"></div>
 				<br><br><br>
+				<p>Es ist deine Aufgabe diese hungrigen Mäuler zu stopfen! Wenn du genug in der vorgegeben Zeit fütterst, ist der Sieg dein!</p>
 				<p>These guys are hungry. It’s your job to feed them! Feed enough of them within the allowed time and win!</p>
 				<br><br><br><br>
 				<div class="cafe-start-toons"></div>
@@ -86,60 +87,60 @@
 					</div>
 					
 					<div class="stat-item" ng-show="stats.win">
-						<div class="stat-key">Score:</div>
+						<div class="stat-key">Punktzahl:</div>
 						<div class="stat-value">{{stats.score}}</div>
 					</div>
 				</div>
 				
 				<br><br>
-				<a href="" class="cafe-brag">Brag on Facebook</a>
+				<a href="" class="cafe-brag">Gib auf Facebook an</a>
 
 				<div ng-show="stats.win">
 					<div class="cafe-bubble-wrap">
 						<div class="bubble-curved bubble-curved-green bubble-animated animated-resize">
 							<div class="text" ng-switch="winMessage">
-								<span class="single-line" ng-switch-when="1">Congratulations!</span>
-								<span class="small" ng-switch-when="2">You win a big hug from a pink gorilla!</span>
-								<span ng-switch-when="3">If you can find one...</span>
-								<span class="small" ng-switch-when="4" style="margin-top: -.3em">You should brag to all your friends on facebook</span>
-								<span class="small" ng-switch-when="5" style="margin-top: -.3em">Because who WOULDN'T want to know</span>
-								<span class="single-line" ng-switch-when="6">Next level!</span>
-								<span class="single-line" ng-switch-when="7">You can do it!</span>
-								<span class="single-line" ng-switch-when="8">I believe in you!</span>
-								<span class="single-line" ng-switch-when="9">You're awesome!</span>
-								<span class="single-line" ng-switch-when="10">Lets do this!</span>
-								<span class="single-line" ng-switch-when="11">...now!</span>
+								<span class="single-line" ng-switch-when="1">Glückwunsch!</span>
+								<span class="small" ng-switch-when="2">Du gewinnst eine Umarmung vom pinken Gorilla!</span>
+								<span ng-switch-when="3">Wenn du einen finden kannst...</span>
+								<span class="small" ng-switch-when="4" style="margin-top: -.3em">Du solltest damit bei allen deinen Freunden auf Facebook angeben!</span>
+								<span class="small" ng-switch-when="5" style="margin-top: -.3em">Denn wen interessiert das denn nicht?!?</span>
+								<span class="single-line" ng-switch-when="6">Nächstes Level!</span>
+								<span class="single-line" ng-switch-when="7">Du schaffst das!</span>
+								<span class="single-line" ng-switch-when="8">Ich glaub an dich!</span>
+								<span class="single-line" ng-switch-when="9">Du machst das richtig gut!</span>
+								<span class="single-line" ng-switch-when="10">Los geht's!</span>
+								<span class="single-line" ng-switch-when="11">...jetzt!</span>
 								<span class="single-line" ng-switch-when="12"><i class="fa fa-gamepad"></i> <i class="fa fa-gamepad"></i> <i class="fa fa-gamepad"></i></span>
-								<span class="single-line" ng-switch-default><b>You win!</b></span>
+								<span class="single-line" ng-switch-default><b>Du bist ein Gewinner!</b></span>
 							</div>
 						</div>
 						<div class="bubble-curved-spacer"></div>
 					</div>
 					<div class="about-green-orange animated-resize" ng-instant="winMessage = (winMessage > 11 ? 0 : (winMessage+1))" instant-pass-thru></div>
 					<div class="divider"></div>
-					<p><br>Well, that was easy. Let’s try the next level!</p>
+					<p><br>Das war ja schon ziemlich einfach. Auf zum nächsten Level!</p>
 				</div>
 				
 				<div ng-show="!stats.win">
 					<div class="cafe-bubble-wrap">
 						<div class="bubble-curved bubble-curved-red bubble-animated animated-resize">
 							<div class="text" ng-switch="loseMessage">
-								<span class="small" ng-switch-when="1">Well, maybe you don't suck...</span>
-								<span class="small" ng-switch-when="2">But you certainly failed this level</span>
-								<span class="single-line" ng-switch-when="3">I know its hard</span>
-								<span class="small" ng-switch-when="4" style="margin-top: -.3em">But its nothing compare to writing content for this.</span>
-								<span class="single-line" ng-switch-when="5">Honestly.</span>
-								<span ng-switch-when="6">It's like I'm talking to myself</span>
-								<span ng-switch-when="7">I feel like I'm taking crazy pills!</span>
+								<span class="small" ng-switch-when="1">Naja, bestimmt ist es nicht deine Schuld...</span>
+								<span class="small" ng-switch-when="2">Aber hier hast du auf jeden Fall versagt</span>
+								<span class="single-line" ng-switch-when="3">Ich weiß, es ist ziemlich schwer</span>
+								<span class="small" ng-switch-when="4" style="margin-top: -.3em">Aber es ist nicht im Vergleich dazu das Spiel zu programmieren.</span>
+								<span class="single-line" ng-switch-when="5">Glaub ich.</span>
+								<span ng-switch-when="6">Ich fühl mich, als ob ich mit mir selbst rede.</span>
+								<span ng-switch-when="7">Ich glaub ich dreh durch!</span>
 								<span class="single-line" ng-switch-when="8"><i class="fa fa-frown-o"></i> <i class="fa fa-smile-o"></i> <i class="fa fa-meh-o"></i></span>
-								<span class="single-line" ng-switch-default><b>You suck!</b></span>
+								<span class="single-line" ng-switch-default><b>Du bist eher nicht su gut, oder?</b></span>
 							</div>
 						</div>
 						<div class="bubble-curved-spacer"></div>
 					</div>
 					<div class="faq-tomato-green animated-resize" ng-instant="loseMessage = (loseMessage > 7 ? 0 : (loseMessage+1))" instant-pass-thru></div>
 					<div class="divider"></div>
-					<p><br>Lets try that one again...</p>
+					<p><br>Lass uns das nochmal versuchen...</p>
 				</div>
 			</div>
 		</div>
@@ -153,8 +154,8 @@
 		<div class="double-content-padding">
 			<button class="pushable button pink pushable big ani-all" ng-click="start()">
 				<span ng-show="home">Start</span>
-				<span ng-show="!home && stats.win">Next Level</span>
-				<span ng-show="!home && !stats.win">Try again</span>
+				<span ng-show="!home && stats.win">Nächstes Level</span>
+				<span ng-show="!home && !stats.win">Nochmal versuchen</span>
 			</button>
 		</div>
 	</div>
