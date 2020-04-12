@@ -6,14 +6,14 @@
 
 			<div class="dialog-padding">
 
-				<p class="suggestion-header">What's up?</p>
+				<p class="suggestion-header">Was gibts?</p>
 				<div class="support-form-group form-group">
 					<textarea ng-autosize ng-focus="softKeyboardModal($event)" ng-model="suggestion.content" class="form-input form-field"></textarea>
 				</div>
 
 				<div class="divider spacer-one-onehalf"></div>
 
-				<p class="suggestion-header">Any specific items you'd like to see, enter here:</p>
+				<p class="suggestion-header">Wenn du was bestimmtes auf der Karte haben willst, gibt es hier ein:</p>
 				<div class="support-form-group form-group">
 					<textarea ng-autosize ng-focus="softKeyboardModal($event)" ng-model="suggestion.add_more_content" class="form-input form-field"></textarea>
 				</div>
@@ -24,7 +24,7 @@
 
 			<div class="dialog-padding dialog-bottom-buttons">
 				<div class="button-pushable">
-					<button class="button green" ng-click="send_form()">Submit</button>
+					<button class="button green" ng-click="send_form()">Abschicken</button>
 				</div>
 			</div>
 
@@ -34,9 +34,9 @@
 		<div ng-if="tab == 'thank-you'">
 
 			<div class="dialog-padding">
-				<p class="suggestion-thanks">Thank you!</p>
+				<p class="suggestion-thanks">Dankeschön!</p>
 				<div class="location-gorillia animated-resize shake"></div>
-				<button class="button green" ng-click="close()">Get me out of here</button>
+				<button class="button green" ng-click="close()">Bring mich zurück</button>
 			</div>
 
 		</div>
