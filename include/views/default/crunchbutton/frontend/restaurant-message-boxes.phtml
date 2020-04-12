@@ -1,18 +1,18 @@
 <div class="address-incomplete-warning order-warning  zoom-anim-dialog mfp-hide dialog mfp-hide">
 	<div class="dialog-padding">
-		<b class="order-warning-bold">Confirm your address?</b>
-		<p>It looks like your address is incomplete: <br/> {{order.form.address}}</p>
+		<b class="order-warning-bold">Bestätige deine Adresse?</b>
+		<p>Es sieht so aus, als wäre deine Adresse unvollständig: <br/> {{order.form.address}}</p>
 		<div class="divider spacer-one-two"></div>
 		<ul>
 			<li>
 				<div class="button-pushable">
 					<button class="button lightorange" ng-click="addressLetMeChangeIt()">
-						Add a City or Zip Code
+						Füge deine Stadt oder Postleitzahl hinzu
 					</button>
 				</div>
 			</li>
 			<li>
-				<div class="cursor link" ng-click="addressPlaceAnyway();">Place Order Anyway</div>
+				<div class="cursor link" ng-click="addressPlaceAnyway();">Trotzdem bestellen</div>
 			</li>
 		</ul>
 	</div>
@@ -20,19 +20,19 @@
 
 <div class="address-not-found-warning order-warning  zoom-anim-dialog mfp-hide dialog mfp-hide">
 	<div class="dialog-padding">
-		<b class="order-warning-bold">Confirm your address?</b>
-		<p>We could not find the address: <br/> {{order.form.address}}</p>
+		<b class="order-warning-bold">Bestätige deine Adresse?</b>
+		<p>Wir konnten deine Adresse nicht finden: <br/> {{order.form.address}}</p>
 		<div class="divider spacer-one-two"></div>
 		<ul>
 			<li>
 				<div class="button-pushable">
 					<button class="button lightorange" ng-click="addressLetMeChangeIt()">
-						Add a City or Zip Code
+						Füge deine Stadt oder Postleitzahl hinzu
 					</button>
 				</div>
 			</li>
 			<li>
-				<div class="cursor link" ng-click="addressPlaceAnyway();">Place Order Anyway</div>
+				<div class="cursor link" ng-click="addressPlaceAnyway();">Trotzdem bestellen</div>
 			</li>
 		</ul>
 	</div>
@@ -41,19 +41,19 @@
 
 <div class="address-out-of-range-warning order-warning  zoom-anim-dialog mfp-hide dialog mfp-hide">
 	<div class="dialog-padding">
-		<b class="order-warning-bold">One sec!</b>
-		<p>The address <b>{{order.form.address}}</b> is out of delivery range, or you have entered an invalid address.<br/><br/>Please check your address, or order takeout.</p>
+		<b class="order-warning-bold">Einen Moment bitte</b>
+		<p>Die Adresse <b>{{order.form.address}}</b> liegt nicht im Liefergebiet, oder du hast eine ungültige Adresse eingegeben.<br/><br/>Bitte überprüfe die Adresse, oder bestelle zum Abholen.</p>
 		<div class="divider spacer-one-two"></div>
 		<ul>
 			<li>
 				<div class="button-pushable">
 					<button class="button lightorange" ng-click="addressLetMeChangeIt()">
-						Modify Address
+						Adresse ändern
 					</button>
 				</div>
 			</li>
 			<li>
-				<div class="cursor link" ng-click="addressPlaceAnyway();">Place Order Anyway</div>
+				<div class="cursor link" ng-click="addressPlaceAnyway();">Trotzdem bestellen</div>
 			</li>
 		</ul>
 	</div>
