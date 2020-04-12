@@ -5,11 +5,11 @@
 
 		<div ng-if="tab == 'facebook'" class="dialog-padding account-modal">
 			<p ng-show="account.user">
-				We got your account right here! Link your account with facebook here so you never have to enter your info again!
+				Wir haben Dein Konto hier! Verknüpfe hier Dein Konto mit Facebook, damit Du Deine Daten nie wieder eingeben musst!
 			</p>
 
 			<p ng-show="!account.user">
-				<b class="account-modal-bold">Get your Crunchbutton account!</b><br>
+				<b class="account-modal-bold">Hol dir dein Crunchbutton Account!</b><br>
 				Log in or sign up using the same awesome button.
 			</p>
 
@@ -17,7 +17,7 @@
 
 			<div class="button-pushable">
 				<button class="button facebook" ng-click="facebook.auth()">
-					<span ng-if="!facebook.facebook.wait">Hop in using Facebook</span>
+					<span ng-if="!facebook.facebook.wait">Nimm Facebook</span>
 					<span ng-if="facebook.facebook.wait">Just a sec
 						<div id="circleG">
 							<div id="circleG_1" class="circleG"></div>
@@ -39,7 +39,7 @@
 		<div ng-if="tab == 'form'">
 			<div class="dialog-padding account-modal">
 				<span ng-click="changeTab( 'facebook' )" class="back-link cursor"><span>&laquo;</span> BACK</span>
-				<p>Not a fan of facebook? Don’t worry. We won't tell anyone. <b>Log in</b> or <b>sign up</b> below.</p>
+				<p>Kein Facebook Fan? Kein Problem. Wir erzählen's keinem. <b>Log in</b> or <b>sign up</b> below.</p>
 
 				<div class="divider spacer-one-two"></div>
 
@@ -61,7 +61,7 @@
 			<div class="dialog-divider"></div>
 			<div class="dialog-padding dialog-bottom-buttons" ng-if="!support.thanks">
 				<div class="button-pushable" ng-if="!account.processing">
-					<button class="button account-submit lightorange" ng-click="account.enter()">Enter the cool kids club</button>
+					<button class="button account-submit lightorange" ng-click="account.enter()">Und rein!</button>
 				</div>
 				<div class="button-pushable" ng-if="account.processing">
 					<button class="button account-submit lightorange">
@@ -83,7 +83,7 @@
 				<span ng-click="changeTab('form')" class="back-link cursor"><span>&laquo;</span> BACK</span>
 
 				<div ng-show="!help.success.visible">
-					<p>Forgot your password? Let's get you a new one!</p>
+					<p>Passwort vergessen? Hier neues machen!</p>
 
 					<div class="divider spacer-one-onehalf"></div>
 
@@ -96,19 +96,19 @@
 
 				<div class="dialog-message dialog-message-error" ng-repeat="error in help.errors">{{error}}</div>
 				<div class="dialog-message dialog-message-success" ng-show="help.success.visible">
-					Please check your email or phone.
+					Bitte check dein Email-Postfach oder Handy.
 					<br/>
-					You will receive a password reset link that will expire in 24 hours.
+					Du bekommst einen Link zum Zurücksetzen, der 24 Stunden gültig ist.
 				</div>
 			</div>
 
 			<div class="dialog-divider" ng-show="!help.success.visible"></div>
 			<div class="dialog-padding dialog-bottom-buttons" ng-show="!help.success.visible">
 				<div class="button-pushable" ng-show="!help.sendingHelpForm">
-					<button class="button account-submit lightorange" ng-click="help.sendForm()">Reset Password</button>
+					<button class="button account-submit lightorange" ng-click="help.sendForm()">Passwort zurücksetzen</button>
 				</div>
 				<div class="button-pushable" ng-show="help.sendingHelpForm">
-					<button class="button account-submit lightorange" disabled="disabled"><i class="fa fa-spinner fa-spin"></i> Sending</button>
+					<button class="button account-submit lightorange" disabled="disabled"><i class="fa fa-spinner fa-spin"></i> Senden</button>
 				</div>
 			</div>
 		</div>
