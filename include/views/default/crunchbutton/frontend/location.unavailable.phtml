@@ -9,13 +9,13 @@
 				<div class="bubble-curved bubble-curved-white bubble-animated animated-resize">
 					<div class="text" ng-switch="loseMessage">
 
-						<span class="small" ng-switch-when="1">Just let us know that you want crunchbutton</span>
-						<span class="small" ng-switch-when="2">and we will be there<br> as soon as we can!</span>
-						<span class="small" ng-switch-when="3">Interested in becoming a Community Rep?</span>
-						<span class="small" ng-switch-when="4">How about becoming a driver?</span>
-						<span class="small" ng-switch-when="5">Head over to our jobs page and let us know!</span>
+						<span class="small" ng-switch-when="1">Sag uns Bescheid, dass du crunchbutton</span>
+						<span class="small" ng-switch-when="2">brauchst und wir strengen <br> uns an, bald da zu sein!</span>
+						<span class="small" ng-switch-when="3">Interessiert deine Gemeinschaft zu vertreten?</span>
+						<span class="small" ng-switch-when="4">Wie wär's damit Essen auszufahren?</span>
+						<span class="small" ng-switch-when="5">Geh auf die Jobs Seite und sag uns Bescheid</span>
 						<span class="single-line" ng-switch-when="6"><i class="fa fa-heart"></i> <i class="fa fa-heart"></i> <i class="fa fa-heart"></i></span>
-						<span class="small" ng-switch-default><b>Grow your own delivery company</b></span>
+						<span class="small" ng-switch-default><b>Starte deine eigene Lieferfirma!</b></span>
 
 					</div>
 				</div>
@@ -28,23 +28,23 @@
 
 				<div ng-show="!show_form">
 					<p>
-						Want to run your own on-demand business? Launch Crunchbutton in your community!
+						Willst du dein eigenes Geschäft machen? Starte crunchbutton für deine Gemeinde!
 						<br><br>
-						Crunchbutton provides you with the resources you'll need to deliver orders, add restaurants, and find customers. Develop your own small business with our tech powering you.
+						Crunchbutton stellt dir die Ressourcen bereit, dass zu tun. Starte dein eigenes Geschäft mit der Crunchbutton technologie
 					</p>
 
 					<div class="divider spacer-one-two"></div>
 
 					<div class="button-pushable">
 						<button class="button orange" ng-click="show_form = true;">
-							<div><b>Bring Crunchbutton to Me</b></div>
+							<div><b>Bring Crunchbutton zu mir</b></div>
 						</button>
 					</div>
 
 					<div class="divider spacer-one-one"></div>
 
 					<p class="center-text">
-						<a href="" class="splash-continue" ng-instant="navigation.link('/location')">Try another location</a>
+						<a href="" class="splash-continue" ng-instant="navigation.link('/location')">Versuchs woanders</a>
 					</p>
 
 				</div>
@@ -53,21 +53,21 @@
 
 					<div class="divider spacer-one-one"></div>
 
-					<div class="run-business-error" ng-if="submitted && !contact.name">Please enter your name</div>
+					<div class="run-business-error" ng-if="submitted && !contact.name">Namen eingeben</div>
 					<input class="location-recommend" autocapitalize="off" autocorrect="off" placeholder="Name"  ng-model="contact.name">
 
-					<div class="run-business-error" ng-if="submitted && !contact.phone">Please enter your phone</div>
+					<div class="run-business-error" ng-if="submitted && !contact.phone">Telefonnummer eingeben</div>
 					<input class="location-recommend" autocapitalize="off" autocorrect="off" placeholder="Phone"  ng-model="contact.phone">
 
-					<div class="run-business-error" ng-if="submitted && !contact.email">Please enter your email</div>
-					<div class="run-business-error" ng-if="submitted && email_invalid">Please enter a valid email</div>
+					<div class="run-business-error" ng-if="submitted && !contact.email">E-Mail eingeben</div>
+					<div class="run-business-error" ng-if="submitted && email_invalid">GÜLTIGE E-Mail eingeben</div>
 					<input class="location-recommend" autocapitalize="off" autocorrect="off" placeholder="Email"  ng-model="contact.email">
 
-					<div class="run-business-error" ng-if="submitted && !contact.address">Please enter your address</div>
+					<div class="run-business-error" ng-if="submitted && !contact.address">Adresse eingeben</div>
 					<input class="location-recommend" autocapitalize="off" autocorrect="off" placeholder="Address"  ng-model="contact.address">
 
-					<div class="run-business-error" ng-if="submitted && !contact.reason">Please tell us why you'd be a good fit to build your own business</div>
-					<textarea class="run-business-textarea" autocapitalize="off" autocorrect="off" placeholder="Why I'd be a good fit to build my own business:" ng-model="contact.reason"></textarea>
+					<div class="run-business-error" ng-if="submitted && !contact.reason">Warum wärst du dazu geeignet?</div>
+					<textarea class="run-business-textarea" autocapitalize="off" autocorrect="off" placeholder="Warum ich toll bin:" ng-model="contact.reason"></textarea>
 
 					<div class="button-pushable">
 						<a class="button orange" ng-click="sendMessage()">
@@ -76,7 +76,7 @@
 					</div>
 
 					<p class="center-text">
-						<a href="" class="splash-continue small" ng-click="show_form = false;">Cancel</a>
+						<a href="" class="splash-continue small" ng-click="show_form = false;">Abbrechen</a>
 					</p>
 
 				</div>
@@ -84,7 +84,7 @@
 			</div>
 
 			<div ng-if="complete" class="run-business-thank-you">
-				<p>Thank you!</p>
+				<p>Dankeschön!</p>
 			</div>
 
 
