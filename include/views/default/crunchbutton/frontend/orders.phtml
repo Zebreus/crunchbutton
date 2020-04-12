@@ -8,13 +8,13 @@
 
 			<div ng-show="!account.user.points.free_delivery_message && account.user.points.away_free_delivery">
 				<p>
-					<span class="delivery-free">You are <b>{{account.user.points.away_free_delivery || 0}}</b> points away
+					<span class="delivery-free">Du bist <b>{{account.user.points.away_free_delivery || 0}}</b> Punkte davon
 					<span class="hide-mobile"><br></span>
-					&nbsp;from a <b>free delivery</b>. </span><br> Earn points by ordering food, sharing your order, or referring friends.
+					&nbsp;entfernt von einmal <b>gratis Liefergebühren</b>. </span><br> Verdien Punkte indem du Essen bestellst, uns auf Social Media teilst oder Freunde anwirbst.
 				</p><br/>
 			</div>
 			<div ng-show="account.user.points.free_delivery_message && account.user.points.free_delivery">
-				<p><span class="delivery-free">You have <b>{{account.user.points.show}}</b> points!</span> <br><br>The next delivery fee is on us.</p>
+				<p><span class="delivery-free">Du hast <b>{{account.user.points.show}}</b> Punkte!</span> <br><br>Die nächsten Liefergebühren gehen aufs Haus.</p>
 			</div>
 
 			<br>
@@ -23,7 +23,7 @@
 
 			<div ng-show="referral.invite_code">
 				<p>
-					Get your friends to enter your referral code in the Notes section of their first order, and you'll both get a FREE Delivery ;)
+					Wenn deine Freune deinen Code eigeben ist die nächsten Bestellung für euch beide frei von Liefergebühren ;)
 				</p>
 				<br><br>
 
@@ -35,12 +35,12 @@
 
 					<a href="{{referral.sms}}">
 						<button class="button lightorange button-invite">
-							<i class="fa fa-comment"></i> <span>Invite Friends</span>
+							<i class="fa fa-comment"></i> <span>Freunde einladen</span>
 						</button>
 					</a>
 
 					<br><br>
-					<p>Your code: <span class="referal-text-spacer"></span><b class="allow-select">{{referral.invite_code}}</b></p>
+					<p>Dein Code: <span class="referal-text-spacer"></span><b class="allow-select">{{referral.invite_code}}</b></p>
 					<div class="hide-mobile">
 						<br>
 						<p>Invite URL: <span class="referal-text-spacer"></span><input class="referal-text-box" type="text" ng-simulate-read-only="{{referral.cleaned_url()}}" value="http://{{referral.cleaned_url()}}"></p>
@@ -53,7 +53,7 @@
 				<div class="hide-mobile">
 					<div class="col-box">
 						<button class="button facebook button-refer" ng-click="referral.facebook('account')">
-							<i class="fa fa-facebook-square"></i> <span>Share</span>
+							<i class="fa fa-facebook-square"></i> <span>Teilen</span>
 						</button>
 
 						<br><br>
@@ -92,7 +92,7 @@
 		<div class="two-col">
 			<div class="col-box">
 				<div class="two-col">
-					<button class="button green button-logout" ng-click="navigation.link('/profile','push')" ng-if="account.user.id_user">Your profile</button>
+					<button class="button green button-logout" ng-click="navigation.link('/profile','push')" ng-if="account.user.id_user">Dein Profil</button>
 				</div>
 			</div>
 		</div>
@@ -102,12 +102,12 @@
 	<br><br><br>
 	<div ng-show="orders.list">
 		<? /* You know, you can reorder any of your previous orders by taping on one of them, then reordering from the next page. Try it! */ ?>
-		<p><span class="account-your-orders">Your Orders</span><br><br></p>
+		<p><span class="account-your-orders">Deine Bestellungen</span><br><br></p>
 	</div>
 
 	<div ng-show="orders.list.length == 0">
-		<p>After you place orders, you'll see them all right here. </p>
-		<h4><a href="/food-delivery" ng-click="navigation.link('/food-delivery')">Place an order</a></h4>
+		<p>Nachdem du Bestellungen aufgegeben hast, kannst du sie hier sehen. </p>
+		<h4><a href="/food-delivery" ng-click="navigation.link('/food-delivery')">Gib eine Bestellung auf.</a></h4>
 		<br /><br />
 	</div>
 
@@ -142,7 +142,7 @@
 		<div class="divider"></div>
 		<div class="bubble-tail bubble-tail-green bubble-animated noselect">
 			<div class="text" ng-switch="pushMessage">
-				You have a ${{credit}} gift card.
+				Du hast einen ${{credit}} Gutschein.
 			</div>
 			<div class="bubble-tail-spacer"></div>
 		</div>
@@ -157,7 +157,7 @@
 		<div class="two-col">
 			<div class="col-box">
 				<div class="two-col">
-					<button class="button lightorange button-logout" ng-click="signout()" ng-if="account.user.id_user">Log Out</button>
+					<button class="button lightorange button-logout" ng-click="signout()" ng-if="account.user.id_user">Abmelden</button>
 				</div>
 			</div>
 		</div>
