@@ -6,12 +6,12 @@
 				<p>
 
 					<span ng-if="!acceptingOrders">
-						<span ng-if="restaurant.delivery">is temporarily unavailable for delivery, but is usually available during the following hours</span>
-						<span ng-if="!restaurant.delivery">is temporarily unavailable but is usually available during the following hours</span>
+						<span ng-if="restaurant.delivery">liefert aktuell nicht, ist aber in dieser Zeitspanne geöffnet</span>
+						<span ng-if="!restaurant.delivery">ist aktuell nicht verfügbar, aber normalerweise in diese Zeitspanne geöffnet</span>
 					</span>
 					<span ng-if="acceptingOrders">
-						<span ng-if="restaurant.delivery">is currently unavailable for delivery. Delivery will be available:</span>
-						<span ng-if="!restaurant.delivery">is currently unavailable. It will be open during the following hours</span>
+						<span ng-if="restaurant.delivery">ist aktuell nicht verfügbar, ist aber in dieser Zeitspanne wieder für dich da:</span>
+						<span ng-if="!restaurant.delivery">ist aktuell nicht verfügbar, ist aber in dieser Zeitspanne wieder geöffnet:</span>
 					</span>
 
 <!--					&nbsp;(<span ng-bind="restaurant._tzabbr"></span>):--><br /><br />
@@ -20,14 +20,14 @@
 				<p ng-bind-html-unsafe="closedMessage" class="dialog-hours"></p>
 			</span>
 			<span ng-if="!active">
-				<p>This restaurant is currently unavailable</p>
+				<p>Dieses Restaurant ist gerade nicht verfügbar</p>
 			</span>
 			<div class="divider"></div>
 
 	</div>
 	<div class="dialog-divider"></div>
 	<div class="dialog-padding dialog-bottom-buttons">
-		<div class="button-pushable"><button class="button lightorange" ng-click="closePopup()">ok</button></div>
+		<div class="button-pushable"><button class="button lightorange" ng-click="closePopup()">Ok</button></div>
 	</div>
 </div>
 
