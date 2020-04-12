@@ -4,17 +4,17 @@
 
 	<div>
 		<div class="toggle-wrapper clearfix">
-			<button ng-click="order.toogleDeliveryTime( 'asap' )" ng-show="!restaurant.force_pre_order" ng-class="{'toggle-active': order.form.delivery_time_type=='asap' }" class="payment-form-toggle">Asap</button>
+			<button ng-click="order.toogleDeliveryTime( 'asap' )" ng-show="!restaurant.force_pre_order" ng-class="{'toggle-active': order.form.delivery_time_type=='asap' }" class="payment-form-toggle">Schnellstmöglich</button>
 			<button ng-click="order.toogleDeliveryTime( 'pre-order' )" ng-class="{'toggle-active': order.form.delivery_time_type=='pre-order' }" class="payment-form-toggle">
-				<span ng-if="restaurant._open">Pre-order</span>
-				<span ng-if="!restaurant._open">Choose Delivery Time:</span>
+				<span ng-if="restaurant._open">Vorbestellen</span>
+				<span ng-if="!restaurant._open">Wann sollen wir liefern?</span>
 			</button>
 		</div>
 	</div>
 
 	<div ng-if="order.form.delivery_time_type == 'asap'">
 		<p class="delivery-free restaurant-delivery-free">
-			<div ng-if="restaurant.eta && ( restaurant._open || restaurant.force_pre_order )">Delivery estimate: about {{restaurant.eta}} minutes</div><br><br>
+			<div ng-if="restaurant.eta && ( restaurant._open || restaurant.force_pre_order )">Dauer bis zur Lieferung: ungefähr {{restaurant.eta}} Minuten</div><br><br>
 		</p>
 	</div>
 
