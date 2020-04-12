@@ -5,7 +5,7 @@
 	<div class="content-padding">
 
 		<span class="hide-mobile">
-			<a ng-click="order.showForm=true" class="order-change-info-link">Change info</a>
+			<a ng-click="order.showForm=true" class="order-change-info-link">Daten ändern</a>
 			<div class="divider dots spacer-one-two"></div>
 		</span>
 
@@ -15,7 +15,7 @@
 		<div class="order-info order-info-oneline">
 			<p>
 				<span ng-if="user.phone">{{ user.phone | formatPhone }}</span>
-				<span ng-if="!user.phone">no phone # provided</span>
+				<span ng-if="!user.phone">Keine Telefonnummer angegeben</span>
 			</p>
 		</div>
 		<div class="divider"></div>
@@ -27,12 +27,12 @@
 		<div class="order-info order-info-oneline">
 
 			<p>
-				<span ng-if="order.form.pay_type=='card' && order.total() <= credit.number">Gift card balance</span>
-				<span ng-if="order.form.pay_type=='card' && credit.number && order.total() > credit.number">Card ending in {{user.card_ending}} &amp; - {{credit.value}} credit</span>
-				<span ng-if="order.form.pay_type=='card' && !credit.number">Card ending in {{user.card_ending}}</span>
-				<span ng-if="order.form.pay_type=='cash'">Pay and tip with <b>cash</b>
+				<span ng-if="order.form.pay_type=='card' && order.total() <= credit.number">Gutschein Guthaben</span>
+				<span ng-if="order.form.pay_type=='card' && credit.number && order.total() > credit.number">Gutschein hat noch {{user.card_ending}} &amp; - {{credit.value}} übrig</span>
+				<span ng-if="order.form.pay_type=='card' && !credit.number">Karte hat noch {{user.card_ending}}</span>
+				<span ng-if="order.form.pay_type=='cash'">Bezahhle mit <b>Bargeld</b>
 					<span ng-if="config.driver_change_amount">
-						<br><i>Drivers only carry ${{config.driver_change_amount}} in change</i>
+						<br><i>Fahrer haben nur ${{config.driver_change_amount}} Wechselgeld dabei.</i>
 					</span>
 				</span>
 			</p>
@@ -49,7 +49,7 @@
 			</p>
 			<p class="restaurant-info-address">
 				<span ng-bind-html-unsafe="order.form.address | nl2br"></span>
-				<i ng-hide="order.form.address">no address provided</i>
+				<i ng-hide="order.form.address">Keine Adresse angegeben</i>
 			</p>
 		</div>
 		<div class="order-info" ng-if="restaurant.takeout == '1' && order.form.delivery_type=='takeout'">
@@ -74,12 +74,12 @@
 
 		<div class="divider spacer-one-two"></div>
 
-		<p>We’ve saved your payment and delivery info for one click reordering.</p>
+		<p>Wir haben deine Adresse und Bezahlmethode gespeichert, damit du mit nur einem Klick wieder bestellen kannst</p>
 
 		<div class="divider spacer-one-two"></div>
 
 		<span class="hide-desktop">
-   		<a ng-click="order.showForm=true" class="order-change-info-link-mobile">Change info</a>
+   		<a ng-click="order.showForm=true" class="order-change-info-link-mobile">Daten ändern</a>
    		<div class="divider dots spacer-one-two"></div>
 		</span>
 
