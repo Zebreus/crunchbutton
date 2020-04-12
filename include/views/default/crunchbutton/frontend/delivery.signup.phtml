@@ -4,20 +4,20 @@
 	<div ng-show="sent">
 
 		<h4>Thanks!</h4>
-		<p>Your data has been submitted. We will get back to you soon. Feel free to admire this pink gorillia for now.</p>
+		<p>Ihre Daten wurden übermittelt. Wir werden uns bald bei Ihnen melden. Fühlen Sie sich frei, diese rosa Gorillia für jetzt zu bewundern.</p>
 		<br><br>
 
 		<div class="location-gorillia animated-resize shake"></div>
 
 		<br><br>
-		<button class="button green" ng-click="navigation.link('/location','push')">get me out of here</button>
+		<button class="button green" ng-click="navigation.link('/location','push')">Weg hier!</button>
 
 	</div>
 
 	<div ng-show="!sent">
 
 		<div class="apply-item-title text-your-order" name="userForm">
-			Delivery Sign Up
+			Lieferung Sign Up
 		</div>
 		<p>&nbsp;</p>
 
@@ -75,7 +75,7 @@
 			<div class="form-group" ng-show="restaurants.Other.checked">
 				<h4><span class="form-required">*</span> Other:</h4>
 				<div class="textbox">
-					<div ng-if="submitted && form.deliveryOtherRestaurant.$invalid">Please enter the restaurant:</div>
+					<div ng-if="submitted && form.deliveryOtherRestaurant.$invalid">Bitte Restaurant eingeben:</div>
 					<input type="text" ng-required="restaurants.Other.checked" name="deliveryOtherRestaurant" ng-model="delivery.otherRestaurant" class="form-control form-control-large">
 				</div>
 			</div>
