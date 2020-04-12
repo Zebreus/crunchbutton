@@ -43,14 +43,14 @@
 			<div ng-hide="account.user.has_auth">
 				<div class="order-buttons">
 					<p>
-						Create an account and earn {{order.reward.points}} points towards a <b>free delivery</b> and reorder your favorite food anywhere, including <a data-ng-href="http://crunchbutton.com">crunchbutton.com</a> and our&nbsp;
+						Erstell einen Account und verdiene {{order.reward.points}} Punkte für einmal <b>gratis Liefergebühren</b> und bestell dein Essen von überall, wie <a data-ng-href="http://crunchbutton.com">crunchbutton.com</a> oder unsere&nbsp;
 						<a ng-show="!isAndroid" data-ng-href="https://itunes.apple.com/app/id721780390">iOS App</a>
 						<a ng-show="isAndroid" data-ng-href="https://play.google.com/store/apps/details?id=com.crunchbutton">Android App</a>
 					</p>
 
 					<br>
 					<div class="button-pushable">
-						<button class="button lightorange" ng-click="modal.signupOpen();">Create an account</button>
+						<button class="button lightorange" ng-click="modal.signupOpen();">Account erstellen</button>
 					</div>
 					<br />
 				</div>
@@ -63,14 +63,14 @@
 
 					<div class="col-box">
 						<p class="two-col">
-							Want free delivery? Share on Facebook or Twitter and earn extra points<span ng-if="referral.invite_url && referral.enabled">, plus earn free delivery for any friends you refer</span>.
+							Willst du einmal gratis Liefergebühren? Auf Facebook oder Twitter teilen, um Punkte zu verdienen<span ng-if="referral.invite_url && referral.enabled"></span>.
 							<br><br>
 						</p>
 
 						<div class="hide-desktop button-refer">
 							<a href="{{referral.sms}}">
 								<button class="button lightorange">
-									<i class="fa fa-comment"></i>&nbsp;&nbsp;&nbsp;<span>Invite Friends</span>
+									<i class="fa fa-comment"></i>&nbsp;&nbsp;&nbsp;<span>Freunde einladen</span>
 								</button>
 							</a>
 						</div>
@@ -78,16 +78,16 @@
 						<div class="two-col">
 							<div class="col-box">
 								<div class="button-refer">
-									<span class="refer-multiply hide-mobile">Double your points</span>
-									<span class="refer-multiply-small hide-desktop">Double your points by sharing on Facebook</span>
+									<span class="refer-multiply hide-mobile">Verdoppel deine Punkte</span>
+									<span class="refer-multiply-small hide-desktop">Verdoppel deine Punkte, indem du uns auf Facebook teilst</span>
 									<button class="button facebook" ng-click="referral.facebook('order');" ng-if="account.user.has_auth && !order.reward.shared.facebook">
-										<i class="fa fa-facebook-square"></i> <span>Share</span>
+										<i class="fa fa-facebook-square"></i> <span>Teilen</span>
 									</button>
 								</div>
 
 								<div class="button-refer">
-									<span class="refer-multiply hide-mobile">Triple your points</span>
-									<span class="refer-multiply-small hide-desktop">Triple them by sharing on Twitter</span>
+									<span class="refer-multiply hide-mobile">Dreifach punkten!</span>
+									<span class="refer-multiply-small hide-desktop">Dreifach Punkten, indem du uns auf Twitter teilst.</span>
 									<button class="button twitter" ng-click="referral.twitter('order')" ng-if="account.user.has_auth && !order.reward.shared.twitter">
 										<i class="fa fa-twitter-square"></i> <span>Tweet</span>
 									</button>
@@ -95,11 +95,11 @@
 
 							</div>
 							<div ng-if="order.reward.shared.facebook">
-								Thanks for sharing on Facebook.
+								Danke, dass du uns gefacebookt hast.
 							</div>
 
 							<div ng-if="order.reward.shared.twitter">
-								Thanks for sharing on Twitter.
+								Danke, dass du uns getwittert hast.
 							</div>
 						</div>
 
@@ -128,10 +128,10 @@
 			<div class="order-icon"><div class="icon-chef"></div></div>
 			<div class="order-info">
 				<p ng-if="order.delivery_service == 1">
-					For updates on your order, please text your driver, whose number you'll be texted.
+					Wenn du Fragen zu deiner Bestellung hast, schreib deinem Fahrer eine Nachricht. Die Nummer wir dir geschickt.
 				</p>
 				<p ng-if="order.delivery_service == 0">
-					For updates on your order, please call
+					Wenn du Fragen zu deiner Bestellung hast, kannst du hier anrufen:
 					<br /><b>{{order._restaurant_name}}: <a href="tel:{{order._restaurant_phone}}" target="_blank">{{ order._restaurant_phone | formatPhone }}</a></b>
 					<br /><br />
 				</p>
@@ -141,8 +141,8 @@
 			<div class="order-icon"><div class="icon-support"></div></div>
 			<div class="order-info">
 				<p>
-					<span class="hide-mobile">For website or app support, please text</span>
-					<span class="hide-desktop">You can reach Crunchbutton by texting</span>
+					<span class="hide-mobile">Wenn du Hilfe mit der Webseite brauchst, schreib uns eine Nachricht.</span>
+					<span class="hide-desktop">Du kannst Crunchbutton unter dieser Nummer erreichen:</span>
 					<br /><b>Crunchbutton: <a href="sms:6467831444" target="_system">{{ '6467831444' | formatPhone }}</a></b>
 				</p>
 			</div>
@@ -160,10 +160,10 @@
 			<div class="order-info order-info-oneline">
 				<p>
 					<span ng-show="(order.delivery_type == 'delivery')">
-						<p ng-show="!order.date_delivery_formatted">Delivery order</p>
-						<p ng-show="order.date_delivery_formatted" class="order-info-address">Delivery around: {{order.date_delivery_formatted}}</p>
+						<p ng-show="!order.date_delivery_formatted">Bestellung zum Liefern</p>
+						<p ng-show="order.date_delivery_formatted" class="order-info-address">Grob geschätzter Lieferzeitpunkt: {{order.date_delivery_formatted}}</p>
 					</span>
-					<span ng-hide="(order.delivery_type == 'delivery')">Takeout order</span>
+					<span ng-hide="(order.delivery_type == 'delivery')">Bestellung zum Abholen</span>
 				</p>
 			</div>
 			<div class="divider"></div>
@@ -176,15 +176,15 @@
 				<p>
 					<span ng-show="(order.pay_type == 'card')">
 						Paid <b>$<span ng-bind-html-unsafe="order.charged | formatPrice"></span></b>
-						<span ng-show="order.campus_cash">&nbsp;by <b>{{order.campus_cash_name}}</b>
+						<span ng-show="order.campus_cash">&nbsp;mit <b>{{order.campus_cash_name}}</b>
 						<span ng-show="order.campus_cash_number"> - <b>{{order.campus_cash_number}}</b></span>
 						</span>
-						<span ng-show="!order.campus_cash">&nbsp;by card <span ng-show="order.card_ending">ending in <b>{{order.card_ending}}</b>
+						<span ng-show="!order.campus_cash">&nbsp;mit Karte <span ng-show="order.card_ending">endet in <b>{{order.card_ending}}</b>
 						</span>
 						</span>
 						<div class="credit" ng-show="!order.reward_delivery_free && (order.credit && order.credit > 0)">( ${{order._credit}} credit )</div>
 					</span>
-					<span ng-hide="(order.pay_type == 'card')">Pay <b>$<span ng-bind-html-unsafe="order.charged | formatPrice"></span></b> <span ng-show="(order.delivery_type == 'delivery')"> and tip</span> with <b>cash</b></span>
+					<span ng-hide="(order.pay_type == 'card')">Bezahle <b>$<span ng-bind-html-unsafe="order.charged | formatPrice"></span></b> <span ng-show="(order.delivery_type == 'delivery')"> und gebe ein Trinkgeld /span> mit <b>Bargeld</b></span>
 				</p>
 			</div>
 
@@ -228,7 +228,7 @@
 		<? /*
 		<div class="credit" ng-if="!order.reward_delivery_free && (order.credit && order.credit > 0)">( ${{order._final_price}} - ${{order._credit}} credit )</div>
 */ ?>
-		<a href="<?=$this->export ? '{{server}}' : ''?>printorder/{{ order.uuid }}" target="_system" class="print-icon"><button class="button lightorange"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;Print Receipt</button></a>
+		<a href="<?=$this->export ? '{{server}}' : ''?>printorder/{{ order.uuid }}" target="_system" class="print-icon"><button class="button lightorange"><i class="fa fa-print"></i>&nbsp;&nbsp;&nbsp;Quittung drucken</button></a>
 	</div>
 
 
