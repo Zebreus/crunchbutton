@@ -3,7 +3,7 @@
 
 
 	<div class="giftcard-balance-container" ng-show="credit.hasValue">
-		You have a <span class="giftcard-value">{{AB.dollar}}{{credit.value}}</span> gift card!
+		Du hast einen <span class="giftcard-value">{{AB.dollar}}{{credit.value}}</span> Gutschein!
 	</div>
 
 	<div ng-if="isMobileWidth" class="restaurant-banana animated-resize hide-desktop"></div>
@@ -15,7 +15,7 @@
 			<div class="payment-ribbon-content restaurant-payment-content">
 
 				<span class="restaurant-payment-item">
-					<span class="restaurant-payment-item-label">Subtotal: </span>
+					<span class="restaurant-payment-item-label">Zwischensumme: </span>
 					<span class="restaurant-payment-item-value">
 						{{AB.dollar}}{{order.info.subtotal}}
 					</span>
@@ -28,19 +28,19 @@
 				 </span>
 
 				<span class="restaurant-payment-item" ng-if="order.form.pay_type!='cash' && order.info.tip!='0.00'">
-					<span class="restaurant-payment-item-label">Tip: </span>
+					<span class="restaurant-payment-item-label">Trinkgeld: </span>
 					<span class="restaurant-payment-item-value">{{AB.dollar}}{{order.info.tip}}</span>
 				</span>
 
 				<span class="restaurant-payment-item" ng-if="order.info.delivery!='0.00' && order.info.delivery_service_fee!='0.00'">
-					<span class="restaurant-payment-item-label">Delivery Fee: </span>
+					<span class="restaurant-payment-item-label">Liefergebühr: </span>
 					<span class="restaurant-payment-item-value">{{AB.dollar}}{{order.info.delivery_service_fee}}</span>
 				</span>
 
 				<span class="restaurant-payment-item" ng-if="order.info.delivery=='0.00' && order.info.fee!='0.00'">
 					<span class="restaurant-payment-item-label">
-						<span ng-if="!restaurant.delivery_service">Delivery Fee:</span>
-						<span ng-if="restaurant.delivery_service">Service Fee:</span>
+						<span ng-if="!restaurant.delivery_service">Liefergebühr:</span>
+						<span ng-if="restaurant.delivery_service">Servicegebühr:</span>
 					</span>
 					<span class="restaurant-payment-item-value">{{AB.dollar}}{{order.info.fee}}</span>
 				</span>
@@ -54,12 +54,12 @@
 				</span>
 
 				<span class="restaurant-payment-item hide-desktop">
-					<span class="restaurant-payment-item-label">Bananas: </span>
+					<span class="restaurant-payment-item-label">Bananen: </span>
 					<span class="restaurant-payment-item-value">0</span>
 				</span>
 
 				<span class="restaurant-payment-item">
-					<span class="restaurant-payment-item-label">Total: </span>
+					<span class="restaurant-payment-item-label">Gesamtsumme: </span>
 					<span class="restaurant-payment-item-value"><b>{{order.info.totalText}}</b></span>
 				</span>
 
@@ -71,13 +71,13 @@
 	<div class="divider"></div>
 
 	<div ng-if="credit.hasValue && order.form.pay_type == 'cash' && order.total() >= credit.number">
-		<div class="giftcard-payment-message">Pay with a card, NOT CASH, to use your {{AB.dollar}}{{credit.value}} gift card</div>
+		<div class="giftcard-payment-message">Bezahl mit Karte, nicht mit Bargeld, um deinen {{AB.dollar}}{{credit.value}} Gutschein zu nutzen.</div>
 	</div>
 
 	<div ng-if="restaurant.delivery == '1' && order.form.delivery_type=='delivery' && points.free_delivery_message && restaurant.delivery_service">
 		<p class="delivery-free restaurant-delivery-free">
-			<strong ng-if="order.form.pay_type == 'card' || order.form.pay_type == 'campus_cash'">You have {{points.show}} points! This delivery fee is on us.</strong>
-			<strong ng-if="order.form.pay_type == 'cash'">Pay with a card, NOT CASH, to get your delivery free.</strong>
+			<strong ng-if="order.form.pay_type == 'card' || order.form.pay_type == 'campus_cash'">Du hast {{points.show}} Punkte! Diesmal gehen die Liefergebühren auf uns.</strong>
+			<strong ng-if="order.form.pay_type == 'cash'">Bezahl mit Karte, nicht mit Bargeld, um keine Liefergebühren zu zahlen.</strong>
 			<br/>
 		</p>
 	</div>
