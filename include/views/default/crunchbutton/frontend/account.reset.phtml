@@ -2,7 +2,7 @@
 	<div class="dialog-padding account-modal">
 		<div ng-show="reset.step == 1">
 
-			<p>Enter your password reset code:</p>
+			<p>Zeig mir dein Passwort Reset Code:</p>
 
 			<div class="divider spacer-one-onehalf"></div>
 
@@ -21,7 +21,7 @@
 			<div class="divisor"></div>
 
 			<div class="button-pushable">
-				<button class="button account-submit lightorange" ng-click="reset.validateCode();">Send</button>
+				<button class="button account-submit lightorange" ng-click="reset.validateCode();">Senden</button>
 			</div>
 
 		</div>
@@ -29,7 +29,7 @@
 
 			<div ng-show="!reset.success">
 
-				<p>Type your new password</p>
+				<p>Vergib ein neues Passwort</p>
 
 				<form class="form">
 
@@ -48,7 +48,7 @@
 				<div class="divisor"></div>
 
 				<div class="button-pushable">
-					<button class="button account-submit lightorange" ng-click="reset.changePassword();">Change</button>
+					<button class="button account-submit lightorange" ng-click="reset.changePassword();">Ändern</button>
 				</div>
 
 			</div>
@@ -56,7 +56,7 @@
 			<div ng-show="reset.success">
 
 				<div class="dialog-message dialog-message-success">
-						Your password has changed!
+						Dein Passwort wurde geändert!
 				</div>
 
 			</div>
