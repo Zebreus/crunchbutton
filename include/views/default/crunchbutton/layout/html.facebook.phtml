@@ -1,8 +1,8 @@
 
 
 <? if ($this->restaurant->id_restaurant) : ?>
-	<meta property="og:title" content="<?=$this->restaurant->name?> on Crunchbutton">
-	<meta property="og:description" content="One click food ordering from <?=$this->restaurant->name?>. We find the best restaurants <?=$this->community->prep?> <?=$this->community->name?> and make ordering your favorite dishes as easy as one click.">
+	<meta property="og:title" content="<?=$this->restaurant->name?> auf Crunchbutton">
+	<meta property="og:description" content="Essen von <?=$this->restaurant->name?> mit einem Klick bestellen. Wir finden die besten Restaurants <?=$this->community->prep?> <?=$this->community->name?> and machen das Bestellen deiner Lieblingsgerichte so leicht wie eine Feder.">
 	<? if ($this->restaurant->image()) : ?>
 		<?php if( $this->restaurant->facebook() ) { ?>
 			<meta property="og:image" content="http://<?=$_SERVER['HTTP_HOST']?>/cache/images/<?=$this->restaurant->facebook()->getFileName()?>">
@@ -12,8 +12,8 @@
 	<? endif ; ?>
 
 <? elseif ($this->community->id_community) : ?>
-	<meta property="og:title" content="Crunchbutton - One click food ordering from <?=$this->community->name?>">
-	<meta property="og:description" content="Your favorite restaurants <?=$this->community->prep?> <?=$this->community->name?> delivered. Get food delivered from places that don't deliver. Place an order, and we save it for next time, along with your delivery and payment info. Order your favorite dishes with a click of one button from your computer or phone.">
+	<meta property="og:title" content="Crunchbutton - Mit einem Klick Essen aus <?=$this->community->name?> bestellen">
+	<meta property="og:description" content="Wir bringen dein Lieblingsrestaurant <?=$this->community->prep?> <?=$this->community->name?> direkt an deine Haustür. Lass dir Sachen von Orten liefern, die nicht liefern. Bestell dein Lieblingsgericht mit nur einem Knopfdruck.">
 	<? foreach ($this->community->restaurants() as $restaurant) : ?>
 		<? if ($restaurant->image() && $restaurant->facebook() ) : ?>
 			<meta property="og:image" content="http://<?=$_SERVER['HTTP_HOST']?>/cache/images/<?=$restaurant->facebook()->getFileName()?>">
@@ -25,8 +25,8 @@
 	<? endforeach; ?>
 
 <? else : ?>
-	<meta property="og:title" content="Crunchbutton - One click food ordering">
-	<meta property="og:description" content="Your favorite restaurants, delivered. Get food delivered from places that don't deliver. Place an order, and we save it for next time, along with your delivery and payment info. Come back and reorder your favorites with just one click.">
+	<meta property="og:title" content="Crunchbutton - Mit einem Klick Essen bestellen">
+	<meta property="og:description" content="Wir bringen dein Lieblingsrestaurant direkt an deine Haustür. Lass dich von Orten beliefern, die nicht liefern. Bestell dein Lieblingsgericht mit nur einem Knopfdruck.">
 	<meta property="og:image" content="http://<?=$_SERVER['HTTP_HOST']?>/assets/images/facebook-like.png">
 <? endif ; ?>
 
