@@ -17,7 +17,7 @@
 			<!-- comment -->
 			<ng-include src="'/assets/view/restaurant-comment.html'"></ng-include>
 
-			<div ng-if="restaurant.eta && restaurant._open" class="restaurant-message">Delivery estimate: about {{restaurant.eta}} minutes</div>
+			<div ng-if="restaurant.eta && restaurant._open" class="restaurant-message">Geschätzte Lieferdauer: {{restaurant.eta}} Minuten</div>
 
 			<!-- desktop version -->
 			<span class="hide-mobile">
@@ -30,7 +30,7 @@
 			</span>
 
 			<div class="content-padding hide-mobile" ng-if="config.suggestions && show_suggestions">
-				<p>See an issue with our menu? Wanna add something? <a href class="suggestion-text" ng-click="suggestion();"> Tell us!</a></p>
+				<p>Hast du ein Problem, oder Fragen zu der Speisekarte? <a href class="suggestion-text" ng-click="suggestion();"> Ja!</a></p>
 			</div>
 
 		</div>
