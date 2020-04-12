@@ -2,21 +2,21 @@
 <div class="giftcard-info">
 
 	<div class="warning" ng-if="giftcard.removed" class="giftcard-error">
-		You just removed a gift card. If you still want to use that gift card, you must put it back in the notes field.
+		Du hast gerade einen Gutschein entfernt. Wenn du ihn immernoch benutzen willst, musst du ihn wieder eintragen.
 	</div>
 
 	<div ng-if="restaurant.giftcard == 0 && giftcard.hasGiftCards" class="giftcard-error">
-		This restaurant does not accept gift card.
+		Dieses Restaurant nimmt keine Gutscheine an.
 	</div>
 
 	<div ng-if="giftcard.hasValue && order.form.pay_type == 'cash' " class="giftcard-error">
-		Pay with a card, NOT CASH, to use your {{AB.dollar}}{{giftcard.value}} gift card!</span>
+		Du musst mit Karte bezahlen, um deinen {{AB.dollar}}{{giftcard.value}} Gutschein zu nutzen!</span>
 	</div>
 
 	<div ng-repeat="success in giftcard.giftcards.success">
 		<div ng-if="success.delivery_free && restaurant.delivery == '1' && order.form.delivery_type=='delivery'">
 			<span ng-if="order.form.pay_type == 'card'">{{success.message}}</span>
-			<div class="giftcard-error" ng-if="order.form.pay_type == 'cash'">Pay with a card, NOT CASH, to get your delivery free</div>
+			<div class="giftcard-error" ng-if="order.form.pay_type == 'cash'">Du musst mit Karte bezahlen, um deine Lieferunggebühren gratis zu bekommen</div>
 		</div>
 	</div>
 
@@ -26,10 +26,10 @@
 		<div ng-repeat="success in giftcard.giftcards.success">
 			<div ng-if="!success.delivery_free && !success.message">
 				<div ng-if="!success.error">
-					Congrats! This gift card ({{success.giftcard}}) gives you ${{success.value}}.
+					Der Gutschein ({{success.giftcard}}) bringt dir ${{success.value}}.
 				</div>
 				<div ng-if="success.error == 'other restaurant'">
-					The gift card ({{success.giftcard}}) you are trying to use belongs to another restaurant.
+					Der Gutschein ({{success.giftcard}}) den du benutzen willst, gehört zu einem anderen Restaurant.
 				</div>
 			</div>
 			<div ng-if="success.message">
@@ -43,7 +43,7 @@
 		<div ng-repeat="error in giftcard.giftcards.error" class="giftcard-error">
 			<div ng-switch on="error.error">
 				<div ng-switch-when="gift card already used">
-					The gift card ({{error.giftcard}}) you are trying to use was already redeemed.
+					Der Gutschein ({{error.giftcard}}) wurde bereits eingelöst.
 				</div>
 				<div ng-switch-when="custom">
 					{{error.message}}
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<span ng-if="giftcard.justOneGiftCardError">
-			You can only use one gift card at a time!
+			Du kannst nur einen Gutschein auf einmal nutzen.
 		</span>
 
 	</div>
