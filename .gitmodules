@@ -1,0 +1,6 @@
+[submodule "crunchbutton-log"]
+	path = crunchbutton-log
+	url = https://github.com/Zebreus/crunchbutton-log.git
+[submodule "crunchbutton-event"]
+	path = crunchbutton-event
+	url = https://github.com/Zebreus/crunchbutton-event.git
