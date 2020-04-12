@@ -32,7 +32,7 @@
 				<table cellpadding="0" cellspacing="0" class="side-menu-wrap">
 					<tr>
 						<td class="side-menu-icon"><i class="fa fa-map-marker"></i></td>
-						<td class="side-menu-label">Change Location</a></td>
+						<td class="side-menu-label">Ort ändern</a></td>
 					</tr>
 				</table>
 			</li>
@@ -41,7 +41,7 @@
 				<table cellpadding="0" cellspacing="0" class="side-menu-wrap">
 					<tr>
 						<td class="side-menu-icon"><i class="fa fa-heart"></i></td>
-						<td class="side-menu-label">Help</a></td>
+						<td class="side-menu-label">Hilfe!</a></td>
 					</tr>
 				</table>
 			</li>
@@ -49,7 +49,7 @@
 				<table cellpadding="0" cellspacing="0" class="side-menu-wrap">
 					<tr>
 						<td class="side-menu-icon"><i class="fa fa-star"></i></td>
-						<td class="side-menu-label">Free food</a></td>
+						<td class="side-menu-label">Gratis Essen</a></td>
 					</tr>
 				</table>
 			</li>
@@ -57,7 +57,7 @@
 				<table cellpadding="0" cellspacing="0" class="side-menu-wrap">
 					<tr>
 						<td class="side-menu-icon"><i class="fa fa-briefcase"></i></td>
-						<td class="side-menu-label">Work with Us</a></td>
+						<td class="side-menu-label">Arbeite mit uns</a></td>
 					</tr>
 				</table>
 			</li>
@@ -65,7 +65,7 @@
 				<table cellpadding="0" cellspacing="0" class="side-menu-wrap">
 					<tr>
 						<td class="side-menu-icon"><i class="fa fa-sign-in"></i></td>
-						<td class="side-menu-label">Log In</a></td>
+						<td class="side-menu-label">Anmelden</a></td>
 					</tr>
 				</table>
 			</li>
@@ -73,7 +73,7 @@
 				<table cellpadding="0" cellspacing="0" class="side-menu-wrap">
 					<tr>
 						<td class="side-menu-icon"><i class="fa fa-sign-out"></i></td>
-						<td class="side-menu-label">Logout</a></td>
+						<td class="side-menu-label">Abmelden</a></td>
 					</tr>
 				</table>
 			</li>
@@ -109,7 +109,7 @@
 
 		<a href="{{(hasFacebook && 'fb://profile/372531956099058' || !hasFacebook && 'http://facebook.com/crunchbutton')}}" target="_system" class="facebook-like-link">
 			<button class="facebook-like">
-				<i class="fa fa-facebook-square"></i> Like
+				<i class="fa fa-facebook-square"></i> Gefällt mir
 			</button>
 		</a>
 
@@ -160,8 +160,8 @@
 		</div>
 
 		<div class="hide-desktop button-bottom-wrapper fixed">
-			<div class="button-pushable" ng-show="navigation.order.form.name || navigation.order.form.phone"><button class="button orange get-food ani-all" ng-click="navigation.order.submit();"><div>Submit Order</div></button></div>
-			<div class="button-pushable" ng-show="!navigation.order.form.name && !navigation.order.form.phone"><button class="button orange get-food ani-all" ng-click="navigation.order.checkout();"><div>Checkout</div></button></div>
+			<div class="button-pushable" ng-show="navigation.order.form.name || navigation.order.form.phone"><button class="button orange get-food ani-all" ng-click="navigation.order.submit();"><div>Bestellung tätigen</div></button></div>
+			<div class="button-pushable" ng-show="!navigation.order.form.name && !navigation.order.form.phone"><button class="button orange get-food ani-all" ng-click="navigation.order.checkout();"><div>Zur Kasse</div></button></div>
 		</div>
 
 		<div class="snap-content-inner bg" ng-scroll-position>
@@ -187,10 +187,10 @@
 			<div class="footer-column-description">
 				<div class="logo"></div>
 				<p>
-					Push a button. Get food. We deliver your favorite restaurants straight to your door.
+					Knopf drücken, Essen bekommen. Wir bringen dein Lieblingsrestaurant direkt an deine Haustür.
 					<br><br>
-					Mail us: <a href="mailto:{{hello}}">{{hello}}</a><br>
-					Text us: <a href="tel:+1{{textUs}}">{{textUsFormatted}}</a>
+					Schreib uns eine Mail: <a href="mailto:{{hello}}">{{hello}}</a><br>
+					Schreib uns eine SMS: <a href="tel:+1{{textUs}}">{{textUsFormatted}}</a>
 				</p>
 
 				<? if (!$this->export) : ?>
@@ -210,11 +210,11 @@
 			<div class="footer-column-info">
 				<ul>
 					<li><b>Information</b></li>
-					<li><a href="/about">About Us</a></li>
-					<li><a href="/owners">Restaurant Signup</a></li>
-					<li><a href="/work">Work with Us</a></li>
-					<li><a href="/help">Help &amp; FAQ</a></li>
-					<li><a href="/free-food">Free Food</a></li>
+					<li><a href="/about">Über uns</a></li>
+					<li><a href="/owners">Restaurant anmelden</a></li>
+					<li><a href="/work">Arbeite mit uns</a></li>
+					<li><a href="/help">Hilfe &amp; FAQ</a></li>
+					<li><a href="/free-food">Gratis Essen</a></li>
 				</ul>
 			</div>
 			<div ng-include="'/assets/view/quote.html'"></div>
