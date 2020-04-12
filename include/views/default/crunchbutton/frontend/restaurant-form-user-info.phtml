@@ -8,8 +8,8 @@
 		<div class="delivery-info-container">
 			<div ng-if="(restaurant.delivery == '1' && restaurant.takeout == '1')">
 				<div class="toggle-wrapper clearfix">
-					<button ng-click="order.toogleDelivery( 'delivery' )" ng-class="{'toggle-active': order.form.delivery_type=='delivery' }" class="payment-form-toggle">delivery</button>
-					<button ng-click="order.toogleDelivery( 'takeout' )" ng-class="{'toggle-active': order.form.delivery_type=='takeout' }" class="payment-form-toggle">takeout</button>
+					<button ng-click="order.toogleDelivery( 'delivery' )" ng-class="{'toggle-active': order.form.delivery_type=='delivery' }" class="payment-form-toggle">Liefern</button>
+					<button ng-click="order.toogleDelivery( 'takeout' )" ng-class="{'toggle-active': order.form.delivery_type=='takeout' }" class="payment-form-toggle">Abholen</button>
 				</div>
 			</div>
 
@@ -17,12 +17,12 @@
 				<i class="form-icon form-field"> </i>
 				<div class="form-field">
 					<div ng-if="(restaurant.delivery == '1' && restaurant.takeout != '1')">
-						<label class="pay-title-label">Delivery Info</label>
+						<label class="pay-title-label">Lieferdaten</label>
 					</div>
 
 					<div ng-if="(restaurant.delivery != '1' && restaurant.takeout == '1')">
-						<label class="pay-title-label">Takeout Info </label>
-						<span class="take-out-only">Take out only!</span>
+						<label class="pay-title-label">Abholungs Informationen</label>
+						<span class="take-out-only">Nur Abholung!</span>
 					</div>
 				</div>
 			</div>
@@ -70,13 +70,13 @@
 			<div class="payment-info field-container">
 				<div class="toggle-wrapper clearfix">
 
-					<button ng-click="order.tooglePayment( 'card' )" ng-if="(restaurant.credit == '1')" ng-class="{'toggle-active': order.form.pay_type=='card' }" class="payment-form-toggle">card</button>
+					<button ng-click="order.tooglePayment( 'card' )" ng-if="(restaurant.credit == '1')" ng-class="{'toggle-active': order.form.pay_type=='card' }" class="payment-form-toggle">Kartenzahlung</button>
 					<button ng-click="order.tooglePayment( 'cash' )" ng-if="(restaurant.cash == '1')" ng-class="{'toggle-active': order.form.pay_type=='cash' }" class="payment-form-toggle">
-						<span ng-if="(restaurant.cash == '1' && ( restaurant.credit == '1' || restaurant.campus_cash ) )">Cash</span>
-						<span ng-if="(restaurant.cash == '1' && restaurant.credit == '0' && !restaurant.campus_cash )">Only Cash Accepted</span>
+						<span ng-if="(restaurant.cash == '1' && ( restaurant.credit == '1' || restaurant.campus_cash ) )">Bargeld</span>
+						<span ng-if="(restaurant.cash == '1' && restaurant.credit == '0' && !restaurant.campus_cash )">Nur Barzahlung</span>
 					</button>
 
-					<button ng-click="order.tooglePayment( 'applepay' )" ng-if="(restaurant.credit == '1') && applePay"  ng-class="{'toggle-active': order.form.pay_type=='applepay' }" class="payment-form-toggle">apple pay</button>
+					<button ng-click="order.tooglePayment( 'applepay' )" ng-if="(restaurant.credit == '1') && applePay"  ng-class="{'toggle-active': order.form.pay_type=='applepay' }" class="payment-form-toggle">Apple Pay</button>
 
 					<button ng-click="order.tooglePayment( 'campus_cash' )" ng-if="restaurant.campus_cash"  ng-class="{'toggle-active': order.form.pay_type=='campus_cash' }" class="payment-form-toggle">{{restaurant.campus_cash_name}}</button>
 
@@ -86,20 +86,20 @@
 
 				<div ng-if="config.driver_change_amount && order.form.pay_type == 'cash'">
 					<p class="delivery-free restaurant-delivery-free">
-						<i>Drivers only carry ${{config.driver_change_amount}} in change.</i><br><br>
+						<i>Unsere Fahren haben nur ${{config.driver_change_amount}} Wechselgeld dabei.</i><br><br>
 					</p>
 				</div>
 
 				<div class="payment-form-group form-group" ng-if="order.form.pay_type=='applepay'">
 					<p class="delivery-free restaurant-delivery-free" ng-click="">
-						<i>After pressing <b>Place Order</b>,<br>select your card from Apple Pay,<br>then pay using your Touch ID.</i><br><br>
+						<i>Nachdem du <b>Bestellen</b> gedrückt hast,<br>wähle deine Karte bei Apple Pay aus<br>und bezahle dann mit Touch ID.</i><br><br>
 					</p>
 				</div>
 
 				<div class="payment-form-group form-group" ng-if="order.form.pay_type=='campus_cash' && order.form.campus_cash_delivery_on_campus_confirmation">
 					<input custom-checkbox type="checkbox" ng-model="order.form.address_campus">
 					<span class="form-field form-field-checkbox-label" ng-click="order.form.address_campus = !order.form.address_campus;">
-					I certify that the address listed above for delivery is located on campus.</span>
+					Ich bestätige hiermit, dass sich die angegebene Adresse auf dem Campus befindet.</span>
 					<div class="divider"></div>
 				</div>
 
@@ -129,7 +129,7 @@
 
 				<div ng-if="order.form.pay_type == 'campus_cash'">
 					<p class="delivery-free restaurant-delivery-free">
-						<i>You will be required to present your student ID to the delivery driver for verification.</i><br><br>
+						<i>Du musst zur Bestätigung dem Fahrer deinen Studierendenausweis zeigen.</i><br><br>
 					</p>
 				</div>
 
