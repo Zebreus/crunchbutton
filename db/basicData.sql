@@ -184,8 +184,8 @@ VALUES
 	(2,NULL,'referral-inviter-credit-value','1',0),
 	(3,NULL,'referral-invited-credit-value','1',0),
 	(4,NULL,'referral-add_credit-to-invited','1',0),
-	(5,NULL,'referral-limit-per-code','100',0),
-	(6,NULL,'referral-is-enable','1',0),
+	(5,NULL,'referral-limit-per-code','0',0),
+	(6,NULL,'referral-is-enable','0',0),
 	(7,NULL,'referral-add-credit-to-invited',NULL,0),
 	(8,NULL,'referral-invites-limit-per-code','100',0),
 	(9,NULL,'rule-time-since-last-order-time','30',0),
@@ -219,9 +219,9 @@ VALUES
 	(37,NULL,'notification-admin-use-new-notify-method','1',0),
 	(38,NULL,'custom-service-group-name','support',0),
 	(39,NULL,'ui2-mobile-force','1',0),
-	(50,NULL,'reward_points_per_cents_value','40',0),
+	(50,NULL,'reward_points_per_cents_value','0',0),
 	(51,NULL,'reward_points_per_cents_operation','*',0),
-	(52,NULL,'reward_points_shared_order_value','1',0),
+	(52,NULL,'reward_points_shared_order_value','0',0),
 	(53,NULL,'reward_points_shared_order_operation','*',0),
 	(54,NULL,'reward_points_get_referred_value','1000000',0),
 	(55,NULL,'reward_points_refer_new_user_value','1000000',0),
@@ -358,8 +358,12 @@ VALUES
 	(282,NULL,'pex_business_card','622',0),
 	(283,NULL,'pex_business_card','1950',0),
 	(284,NULL,'order_ticket_radius','1',0),
-	(285,NULL,'order_ticket_geo',NULL,0);
-
+	(285,NULL,'order_ticket_geo',NULL,0)
+    ON DUPLICATE KEY UPDATE
+    	`id_site` = values(`id_site`) ,
+        `key` = values(`key`) ,
+        `value` = values(`value`) , 
+        `exposed` = values(`exposed`);
 
 INSERT INTO `cron_log` (`id_cron_log`, `description`, `class`, `start_date`, `interval`, `interval_unity`, `current_status`, `next_time`, `finished`, `interactions`, `env`)
 VALUES
