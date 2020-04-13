@@ -1705,7 +1705,7 @@ CREATE TABLE `log` (
   `id_log` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_log_type` int(11) unsigned DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `data` text,
+  `data` mediumtext,
   `level` enum('critical','debug','error','warning') DEFAULT 'debug',
   PRIMARY KEY (`id_log`),
   KEY `log_ibfk_1` (`id_log_type`),
