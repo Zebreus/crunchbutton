@@ -1398,8 +1398,13 @@ class Crunchbutton_Restaurant extends Cana_Table_Trackchange {
 
 				if( $i_close >= intval( $end->format( 'YmdHi' ) ) ){
 					$_hour = clone $hour;
-					$_hour->time_open = $start->format( 'h:i A' );
-					$_hour->time_close = $end->format( 'h:i A' );
+					if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+                        $_hour->time_close = $end->format( 'h:i A' );
+                        $_hour->time_open = $start->format( 'h:i A' );
+					}else{
+                        $_hour->time_close = $end->format( 'H:i' );
+                        $_hour->time_open = $start->format( 'H:i' );
+					}
 					// $_hour->i_time_open = intval( $start->format( 'YmdHi' ) );
 					// $_hour->i_time_close = intval( $end->format( 'YmdHi' ) );
 					$_segments[] = $_hour;

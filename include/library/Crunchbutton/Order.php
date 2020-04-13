@@ -1982,7 +1982,11 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		}
 
 		$date = $order->date();
-		$date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'g:i:s A' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'g:i:s A' );
+		}else{
+			$date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'G:i:s' );
+		}
 
 		$env = c::getEnv();
 
@@ -2018,7 +2022,11 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		}
 
 		$date = $order->date();
-		$date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'g:i:s A' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'g:i:s A' );
+		}else{
+			$date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'G:i:s' );
+		}
 
 		$env = c::getEnv();
 
@@ -2294,7 +2302,11 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 							$date_delivery = new DateTime( $this->date_delivery, new DateTimeZone( c::config()->timezone ) );
 							$date_delivery->setTimezone(  new DateTimeZone( $this->restaurant()->timezone )  );
 							$msg .= "Your order will arrive around ";
-							$msg .= $date_delivery->format('h:i a');
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$msg .= $date_delivery->format('h:i a');
+							}else{
+								$msg .= $date_delivery->format('H:i');
+							}
 							$msg .= "!\n\n";
 					} else{
 						if ( $this->delivery_type == 'delivery' && $this->restaurant()->delivery_estimated_time ) {
@@ -2324,7 +2336,12 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 					$date->setTimeZone( new DateTimeZone( $timezone ) );
 				}
 
-				$when = $date->format('M j, g:i a T');
+				$when;
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$when = $date->format('M j, g:i a T');
+				}else{
+					$when = $date->format('M j, G:i T');
+				}
 
 				$confirmed = $this->confirmed? 'yes' : 'no';
 				$refunded = $this->refunded? 'yes':'no';
@@ -2523,16 +2540,32 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 			$date_delivery = new DateTime( $this->date_delivery, new DateTimeZone( c::config()->timezone ) );
 			$date_delivery->setTimezone(  new DateTimeZone( $this->restaurant()->timezone )  );
 			if( $date_delivery->format( 'i' ) > 0 ){
-				$msg .= $date_delivery->format( 'g:i' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$msg .= $date_delivery->format( 'g:i' );
+				}else{
+					$msg .= $date_delivery->format( 'G:i' );
+				}
 			} else {
-				$msg .= $date_delivery->format( 'g' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$msg .= $date_delivery->format( 'g' );
+				}else{
+					$msg .= $date_delivery->format( 'G' );
+				}
 			}
 			$msg .= '-';
 			$date_delivery->modify( self::PRE_ORDER_DELIVERY_WINDOW );
 			if( $date_delivery->format( 'i' ) > 0 ){
-				$msg .= $date_delivery->format( 'g:iA' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$msg .= $date_delivery->format( 'g:iA' );
+				}else{
+					$msg .= $date_delivery->format( 'G:i' );
+				}
 			} else {
-				$msg .= $date_delivery->format( 'gA' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$msg .= $date_delivery->format( 'gA' );
+				}else{
+					$msg .= $date_delivery->format( 'G' );
+				}
 			}
 			return $msg;
 		}
@@ -2588,7 +2621,19 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		} else {
 
 			$date = $this->date();
-			$out['date_formated'] = $date->format( 'g:i a, M dS, Y' );
+			
+			$calc_delivery_estimated_time = $this->restaurant()->calc_delivery_estimated_time( $date->format( 'Y-m-d H:i:s' ), true );
+			$calc_pickup_estimated_time = $this->restaurant()->calc_pickup_estimated_time( $date->format( 'Y-m-d H:i:s' ), true );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$out['date_formated'] = $date->format( 'g:i a, M dS, Y' );
+				$out['_restaurant_delivery_estimated_time_formated'] = $calc_delivery_estimated_time->format( 'g:i a' );
+				$out['_restaurant_pickup_estimated_time_formated'] = $calc_pickup_estimated_time->format( 'g:i a' );
+			}else{
+				$out['date_formated'] = $date->format( 'G:i, M dS, Y' );
+				$out['_restaurant_delivery_estimated_time_formated'] = $calc_delivery_estimated_time->format( 'G:i' );
+				$out['_restaurant_pickup_estimated_time_formated'] = $calc_pickup_estimated_time->format( 'G:i' );
+			}
+			
 			$out['_restaurant_name'] = $this->restaurant()->name;
 			$out['_restaurant_permalink'] = $this->restaurant()->permalink;
 			$out['_restaurant_phone'] = $this->restaurant()->phone;
@@ -2597,10 +2642,6 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 			$out['_restaurant_address'] = $this->restaurant()->address;
 			$out['_restaurant_delivery_estimated_time'] = $this->restaurant()->delivery_estimated_time;
 			$out['_restaurant_pickup_estimated_time'] = $this->restaurant()->pickup_estimated_time;
-			$calc_delivery_estimated_time = $this->restaurant()->calc_delivery_estimated_time( $date->format( 'Y-m-d H:i:s' ), true );
-			$out['_restaurant_delivery_estimated_time_formated'] = $calc_delivery_estimated_time->format( 'g:i a' );
-			$calc_pickup_estimated_time = $this->restaurant()->calc_pickup_estimated_time( $date->format( 'Y-m-d H:i:s' ), true );
-			$out['_restaurant_pickup_estimated_time_formated'] = $calc_pickup_estimated_time->format( 'g:i a' );
 			$out['user'] = $this->user()->uuid;
 			$out['_message'] = nl2br($this->orderMessage('web'));
 			$out['charged'] = $this->charged();
@@ -3266,10 +3307,14 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 			$params = [ 'id_order' => $this->id_order,
 									'id_admin' => $admin->id_admin,
 									'date' => $now->format( 'Y-m-d H:i:s' ),
-									'date_formatted' => $now->format( 'M jS Y g:i:s A T' ),
 									'type' => $this->pay_type,
 									'should_use' => $this->shouldUsePexCard(),
 									'amount' => floatval( $this->final_price - $this->delivery_fee ) ];
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$params['date_formatted'] = $now->format( 'M jS Y g:i:s A T' );
+			}else{
+				$params['date_formatted'] = $now->format( 'M jS Y G:i:s T' );
+			}
 			Crunchbutton_Pexcard_Report_Order::byOrder( $params );
 		}
 
@@ -3729,17 +3774,31 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 				switch ($action->type) {
 					case 'delivery-delivered':
 						$this->_deliveryStatus['delivered'] = Admin::o($action->id_admin);
-						$this->_deliveryStatus['delivered_date'] = $action->date()->format( 'g:i A' );
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$this->_deliveryStatus['delivered_date'] = $action->date()->format( 'g:i A' );
+						}else{
+							$this->_deliveryStatus['delivered_date'] = $action->date()->format( 'G:i' );
+						}
+						
 						break;
 
 					case 'delivery-pickedup':
 						$this->_deliveryStatus['pickedup'] = Admin::o($action->id_admin);
-						$this->_deliveryStatus['pickedup_date'] = $action->date()->format( 'g:i A' );
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$this->_deliveryStatus['pickedup_date'] = $action->date()->format( 'g:i A' );
+						}else{
+							$this->_deliveryStatus['pickedup_date'] = $action->date()->format( 'G:i' );
+						}
 						break;
 
 					case 'delivery-accepted':
 						$acpt[$action->id_admin] = true;
-						$this->_deliveryStatus['accepted_date'] = $action->date()->format( 'g:i A' );
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$this->_deliveryStatus['accepted_date'] = $action->date()->format( 'g:i A' );
+						}else{
+							$this->_deliveryStatus['accepted_date'] = $action->date()->format( 'G:i' );
+						}
+						
 						break;
 
 					case 'delivery-rejected':
@@ -4013,7 +4072,11 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 	public function campus_cash_charged(){
 		$transaction = Crunchbutton_Order_Transaction::q( 'SELECT * FROM order_transaction WHERE id_order = ? AND type = ? ORDER BY id_order_transaction DESC LIMIT 1', [ $this->id_order, Crunchbutton_Order_Transaction::TYPE_CAMPUS_CASH_CHARGED ] )->get( 0 );
 		if( $transaction->id_order_transaction ){
-			return [ 'name' => $transaction->admin()->name, 'date' => $transaction->date()->format( 'M dS g:i a' ) ];
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				return [ 'name' => $transaction->admin()->name, 'date' => $transaction->date()->format( 'M dS g:i a' ) ];
+			}else{
+				return [ 'name' => $transaction->admin()->name, 'date' => $transaction->date()->format( 'M dS G:i' ) ];
+			}
 		}
 		return false;
 	}

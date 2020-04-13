@@ -186,8 +186,16 @@ class Crunchbutton_Support_Message extends Cana_Table {
 		unset( $out[ 'media' ] );
 		unset( $out[ 'id' ] );
 		unset( $out[ 'id_phone' ] );
-		$out['date'] = $this->date()->format( 'M jS Y g:i:s A T' );
-		$out['hour'] = $this->date()->format( 'D m/d @ g:i A' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$out['date'] = $this->date()->format( 'M jS Y g:i:s A T' );
+		}else{
+			$out['date'] = $this->date()->format( 'M jS Y G:i:s T' );
+		}
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$out['hour'] = $this->date()->format( 'D m/d @ g:i A' );
+		}else{
+			$out['hour'] = $this->date()->format( 'D m/d @ G:i' );
+		}
 		$out['name'] = $this->admin()->firstName();
 		return $out;
 	}

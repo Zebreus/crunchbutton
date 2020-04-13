@@ -358,7 +358,9 @@ VALUES
 	(282,NULL,'pex_business_card','622',0),
 	(283,NULL,'pex_business_card','1950',0),
 	(284,NULL,'order_ticket_radius','1',0),
-	(285,NULL,'order_ticket_geo',NULL,0)
+	(285,NULL,'order_ticket_geo',NULL,0),
+    (286,NULL,'time_use_12_hours','0',0),
+    (286,NULL,'language_iso_code','de',0)
     ON DUPLICATE KEY UPDATE
     	`id_site` = values(`id_site`) ,
         `key` = values(`key`) ,

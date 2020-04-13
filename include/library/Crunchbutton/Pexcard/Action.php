@@ -222,10 +222,18 @@ class Crunchbutton_Pexcard_Action extends Cana_Table {
 		$out[ 'card_serial' ] = $pexcard->card_serial;
 		$out[ 'last_four' ] = $pexcard->last_four;
 
-		$out[ 'date_formated' ] = $this->date()->format( 'M jS Y g:i:s A T' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$out[ 'date_formated' ] = $this->date()->format( 'M jS Y g:i:s A T' );
+		}else{
+			$out[ 'date_formated' ] = $this->date()->format( 'M jS Y G:i:s T' );
+		}
 
 		if( $out[ 'status_date' ] ){
-			$out[ 'status_date_formated' ] = $this->status_date()->format( 'M jS Y g:i:s A T' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$out[ 'status_date_formated' ] = $this->status_date()->format( 'M jS Y g:i:s A T' );
+			}else{
+				$out[ 'status_date_formated' ] = $this->status_date()->format( 'M jS Y G:i:s T' );
+			}
 		}
 
 		if( $out[ 'response' ] ){

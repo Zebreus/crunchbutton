@@ -859,15 +859,18 @@ class Crunchbutton_Community_Shift extends Cana_Table_Trackchange {
 		$hour = $time[0];
 		$min  = $time[1];
 		$separator = ':';
-		$ampm = 'am';
-		if( $hour > 12 ){
-			$hour -= 12;
-			$ampm = 'pm';
-		} else if( $hour == 12 ){
-			$ampm = 'pm';
-		}
-		if( $hour == 0 ){
-			$hour = 12;
+		$ampm = '';
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$ampm = 'am';
+			if( $hour > 12 ){
+				$hour -= 12;
+				$ampm = 'pm';
+			} else if( $hour == 12 ){
+				$ampm = 'pm';
+			}
+			if( $hour == 0 ){
+				$hour = 12;
+			}
 		}
 		if( intval( $min ) == 0 ){
 			$min = '';
@@ -877,11 +880,19 @@ class Crunchbutton_Community_Shift extends Cana_Table_Trackchange {
 	}
 
 	public function dateStartFriendly( $timezone = false ){
-		return $this->dateStart( $timezone )->format( 'M jS Y g:i A T' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			return $this->dateStart( $timezone )->format( 'M jS Y g:i A T' );
+		}else{
+			return $this->dateStart( $timezone )->format( 'M jS Y G:i T' );
+		}
 	}
 
 	public function dateEndFriendly( $timezone = false ){
-		return $this->dateEnd( $timezone )->format( 'M jS Y g:i A T' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			return $this->dateEnd( $timezone )->format( 'M jS Y g:i A T' );
+		}else{
+			return $this->dateEnd( $timezone )->format( 'M jS Y G:i T' );
+		}
 	}
 
 	public function fullDate( $timezone = false ){
@@ -1406,15 +1417,31 @@ class Crunchbutton_Community_Shift extends Cana_Table_Trackchange {
 						$message .= $commas;
 
 						if( intval( $shift->dateStart()->format( 'i' ) ) > 0 ){
-							$message .= $shift->dateStart()->format( 'D (m/d) g:ia' );
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$message .= $shift->dateStart()->format( 'D (m/d) g:ia' );
+							}else{
+								$message .= $shift->dateStart()->format( 'D (m/d) G:i' );
+							}
 						} else {
-							$message .= $shift->dateStart()->format( 'D (m/d) ga' );
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$message .= $shift->dateStart()->format( 'D (m/d) ga' );
+							}else{
+								$message .= $shift->dateStart()->format( 'D (m/d) G' );
+							}
 						}
 						$message .= '-';
 						if( intval( $shift->dateEnd()->format( 'i' ) ) > 0 ){
-							$message .= $shift->dateEnd()->format( 'g:ia T' );
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$message .= $shift->dateEnd()->format( 'g:ia T' );
+							}else{
+								$message .= $shift->dateEnd()->format( 'G:i T' );
+							}
 						} else {
-							$message .= $shift->dateEnd()->format( 'ga T' );
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$message .= $shift->dateEnd()->format( 'ga T' );
+							}else{
+								$message .= $shift->dateEnd()->format( 'G T' );
+							}
 						}
 						$commas = ', ';
 					}

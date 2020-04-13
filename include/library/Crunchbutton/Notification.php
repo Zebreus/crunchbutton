@@ -230,7 +230,11 @@ class Crunchbutton_Notification extends Cana_Table
 		Log::debug( [ 'order' => $order->id_order, 'action' => 'smsFaxError init', 'object' => $order->json(), 'type' => 'notification' ] );
 
 		$date = $order->date();
-		$date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'g:i:s A' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+            $date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'g:i:s A' );
+		}else{
+            $date = $date->format( 'M jS Y' ) . ' - ' . $date->format( 'G:i:s' );
+		}
 
 		$message = Crunchbutton_Message_Sms::greeting() . 'FAX Error: O# ' . $order->id_order . ' for ' . $order->restaurant()->name . ' (' . $date . ').';
 		$message .= "\n";
