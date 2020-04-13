@@ -86,7 +86,7 @@ $sql = str_replace([
 	getenv('ADMIN_LOGIN'),
 	getenv('ADMIN_PHONE'),
 	sha1($crypt->encrypt(getenv('ADMIN_PASSWORD')))
-],file_get_contents('db/dummy.sql'));
+],file_get_contents('db/basicData.sql'));
 
 $db->exec($sql);
 echo "complete.\n";
