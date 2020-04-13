@@ -1,8 +1,8 @@
 <div class="support-container zoom-anim-dialog mfp-hide dialog" ng-controller="SupportCtrl">
 	<div class="dialog-padding">
-		<h1 ng-if="!support.error && !support.thanks">Send us a message</h1>
+		<h1 ng-if="!support.error && !support.thanks">Schreib uns eine Nachricht</h1>
 
-		<p ng-if="support.thanks && !support.error">Thanks, we'll get back to you as fast as we can.</p>
+		<p ng-if="support.thanks && !support.error">Danke, wir melden uns schnellstmöglich bei dir.</p>
 		
 		<div class="dialog-message dialog-message-error" ng-if="support.error && !support.thanks">
 			<i class="fa fa-frown-o"></i>&nbsp;&nbsp;
@@ -13,17 +13,17 @@
 			<form>
 				<div class="support-form-group form-group">
 					<i class="fa fa-user support-form-icon form-icon form-field"></i>
-					<input type="text" maxlength="50" ng-model="support.form.name" name="support-name" tabindex="1" class="form-input support-form-input form-field" placeholder="name">
+					<input type="text" maxlength="50" ng-model="support.form.name" name="support-name" tabindex="1" class="form-input support-form-input form-field" placeholder="Name">
 				</div>
 
 				<div class="support-form-group form-group">
 					<i class="fa fa-phone support-form-icon form-icon form-field"></i>
-					<input type="tel" maxlength="30" ng-model="support.form.phone" name="support-phone" tabindex="2" ng-format-phone class="form-input support-form-input form-field" placeholder="phone number">
+					<input type="tel" maxlength="30" ng-model="support.form.phone" name="support-phone" tabindex="2" ng-format-phone class="form-input support-form-input form-field" placeholder="Telefonnummer">
 				</div>
 
 				<div class="support-form-group form-group">
 					<i class="fa fa-bullhorn support-form-icon form-icon form-field"></i>
-					<textarea ng-autosize ng-model="support.form.message" class="form-input support-form-input form-field" name="support-message" tabindex="3" placeholder="message"></textarea>
+					<textarea ng-autosize ng-model="support.form.message" class="form-input support-form-input form-field" name="support-message" tabindex="3" placeholder="Nachricht"></textarea>
 				</div>
 
 			</form>
@@ -34,12 +34,12 @@
 	<div class="dialog-divider"></div>
 
 	<div class="dialog-padding dialog-bottom-buttons" ng-if="!support.thanks">
-		<button class="button lightorange pushable" ng-if="!support.isSending" ng-click="support.send();" tabindex="4">send</button>
+		<button class="button lightorange pushable" ng-if="!support.isSending" ng-click="support.send();" tabindex="4">Absenden</button>
 		<i ng-if="support.isSending" class=" fa fa-spinner fa-spin"></i>
 	</div>
 	
 	<div class="dialog-padding dialog-bottom-buttons" ng-if="support.thanks">
-		<button class="button lightorange pushable" ng-click="closePopup()">you're welcome</button>
+		<button class="button lightorange pushable" ng-click="closePopup()">Bitte</button>
 	</div>
 
 </div>
