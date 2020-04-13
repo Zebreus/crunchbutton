@@ -184,6 +184,10 @@ NGApp.factory( 'CommunityService', function( $rootScope, $resource, $routeParams
 		timezones.push( { value: 'America/Denver', label: 'Mountain' } );
 		timezones.push( { value: 'America/Phoenix', label: 'Arizona (no DST)' } );
 		timezones.push( { value: 'America/Los_Angeles', label: 'Pacific' } );
+		timezones.push( { value: 'Europe/Berlin', label: 'Berlin' } );
+		timezones.push( { value: 'Europe/London', label: 'London' } );
+		timezones.push( { value: 'CET', label: 'Central European Time' } );
+		timezones.push( { value: 'Etc/UTC', label: 'UTC' } );
 		return timezones;
 	}
 
