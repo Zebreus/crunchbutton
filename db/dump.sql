@@ -1829,7 +1829,7 @@ CREATE TABLE `notification_log` (
 CREATE TABLE `option` (
   `id_option` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `price` float NOT NULL DEFAULT '0',
+  `price` float DEFAULT '0',
   `id_restaurant` int(11) unsigned DEFAULT NULL,
   `id_option_parent` int(11) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
