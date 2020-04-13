@@ -5,14 +5,14 @@
 		<h4 ng-bind-html-unsafe="slogan" class="restaurants-top-title"></h4>
 		<p ng-bind-html-unsafe="tagline"></p>
 		<p ng-if="operation_hours" class="operation-hours">
-			Crunchbutton delivers: <br><span ng-bind-html-unsafe="operation_hours"></span>
+			Crunchbutton liefert: <br><span ng-bind-html-unsafe="operation_hours"></span>
 		</p>
-		<p><br>{{entered}} - <a href="/location" title="Change">Change</i></a></p>
+		<p><br>{{entered}} - <a href="/location" title="Change">Ändern</i></a></p>
 	</div>
 
 	<div class="hide-desktop">
 		<p ng-if="operation_hours" class="operation-hours content-padding">
-			<strong>Crunchbutton delivers:</strong>
+			<strong>Crunchbutton liefert:</strong>
 			<br><span ng-bind-html-unsafe="operation_hours"></span>
 			<div class="divider"></div>
 			<br><br>
@@ -24,22 +24,22 @@
 			<div ng-if="!allClosed && restaurants">
 				<div class="bubble-tail bubble-tail-green bubble-animated">
 					<div class="text" ng-switch="pushMessage">
-						<span ng-switch-when="1">We choose<br>the best food...</span>
-						<span ng-switch-when="2">From the best restaurants...</span>
-						<span ng-switch-when="3">So you don't<br> have to!</span>
-						<span ng-switch-when="4">Screw huge<br> menus!</span>
-						<span class="single-line" ng-switch-when="5">Screw gross food!!</span>
-						<span ng-switch-when="6">We only have awesome stuff!</span>
-						<span class="single-line" ng-switch-when="7">Got a suggestion?</span>
-						<span ng-switch-when="8">Want to work<br> for us?</span>
-						<span class="single-line" ng-switch-when="9">Send us a text!</span>
-						<span ng-switch-when="10">We are always looking for...</span>
-						<span ng-switch-when="11" class="single-line">Awesome people...</span>
-						<span class="single-line" ng-switch-when="12">And great food!</span>
+						<span ng-switch-when="1">Wir wählen<br>das beste Essen...</span>
+						<span ng-switch-when="2">Von den besten Restaurants...</span>
+						<span ng-switch-when="3">Damit du wengiger<br> Arbeit hast!</span>
+						<span ng-switch-when="4">Nie mehr viel<br> zu großen Speißekarten!</span>
+						<span class="single-line" ng-switch-when="5">Nie mehr schlechtes Essen!!</span>
+						<span ng-switch-when="6">Wir haben nur das gute Zeug!</span>
+						<span class="single-line" ng-switch-when="7">Hast du einen Vorschlag?</span>
+						<span ng-switch-when="8">Willst du für<br> uns arbeiten?</span>
+						<span class="single-line" ng-switch-when="9">Schreib uns!</span>
+						<span ng-switch-when="10">Wir suchen immer nach...</span>
+						<span ng-switch-when="11" class="single-line">Tollen Leuten...</span>
+						<span class="single-line" ng-switch-when="12">Und dem besten Essen!</span>
 						<span class="single-line" ng-switch-when="13"><i class="fa fa-heart"></i> <i class="fa fa-heart"></i> <i class="fa fa-heart"></i></span>
 						<span ng-switch-default class="restaurants-push-tagline">
-							<span class="hide-desktop"><b>Push a button</b><br>Get food delivered</span>
-							<span class="hide-mobile">Choose a <br><b>restaurant</b></span>
+							<span class="hide-desktop"><b>Push a button</b><br>Lass die Essen liefern!</span>
+							<span class="hide-mobile">Wähle ein <br><b>Restaurant</b></span>
 						</span>
 
 					</div>
@@ -51,18 +51,18 @@
 			<div ng-if="allClosed">
 				<div class="bubble-tail bubble-tail-green bubble-animated noselect">
 					<div class="text" ng-switch="pushMessage">
-						<span ng-switch-when="1">We will be back soon.</span>
-						<span ng-switch-when="2" class="small">Know of some awesome restaurants in your area?</span>
-						<span ng-switch-when="3">Want to become a delivery driver?</span>
-						<span class="single-line" ng-switch-when="4">Send us a txt...</span>
-						<span class="single-line" ng-switch-when="5">And lets do stuff!</span>
+						<span ng-switch-when="1">Wir sind bald wieder da.</span>
+						<span ng-switch-when="2" class="small">Kennst du gute Restaurants in deiner Gegend?</span>
+						<span ng-switch-when="3">Willst du Fahrer werden?</span>
+						<span class="single-line" ng-switch-when="4">Schreib uns eine Nachricht...</span>
+						<span class="single-line" ng-switch-when="5">Und lass uns das machen!</span>
 						<span class="single-line" ng-switch-when="6"><i class="fa fa-cutlery"></i> <i class="fa fa-cutlery"></i> <i class="fa fa-cutlery"></i></span>
 						<span ng-switch-default class="restaurants-push-tagline">
 							<span ng-if="community_closed" class="small">
 								{{community_closed}}
 							</span>
-							<span ng-if="!community_closed && !openSoon"><b>Wahhhhhh!!!</b><br>No delivery is available</span>
-							<span ng-if="!community_closed && openSoon">Delivery available soon!!</span>
+							<span ng-if="!community_closed && !openSoon"><b>Wahhhhhh!!!</b><br>Keine Lieferung verfügbar</span>
+							<span ng-if="!community_closed && openSoon">Lieferung bald verfügbar!!</span>
 						</span>
 					</div>
 					<div class="bubble-tail-spacer"></div>
@@ -98,14 +98,14 @@
 	<div class="divider"></div>
 
 	<button class="button green restaurants-more" ng-if="restaurantsToShow < restaurants.length" ng-click="showMoreRestaurants()">
-		More awesome Restaurants
+		Mehr tolle Restaurants
 	</button>
 
 	</div>
 </div>
 
 <div class="content-padding suggestion-footer" ng-if="config.suggestions && show_suggestions">
-	<p>Want something else delivered? <a href class="suggestion-text" ng-click="suggestion();"> Let us know!</a></p>
+	<p>Willst du was anderes geliefert bekommen? <a href class="suggestion-text" ng-click="suggestion();"> Sag uns Bescheid!</a></p>
 </div>
 
 <ng-include src="'/assets/view/restaurants-suggestion.html'"></ng-include>
