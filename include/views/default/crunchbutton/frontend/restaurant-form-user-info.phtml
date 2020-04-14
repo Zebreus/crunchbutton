@@ -33,29 +33,29 @@
 			<div class="personal-info field-container">
 				<div class="payment-form-group form-group">
 					<i class="fa fa-user payment-form-icon form-icon form-field"></i>
-					<input focus="softKeyboard($event);" ng-blur="softKeyboardExit()" type="text" name="pay-name" tabindex="2" ng-model="order.form.name" class="payment-form-input form-input form-field" placeholder="name" autocomplete="name" x-autocompletetype="full-name">
+					<input focus="softKeyboard($event);" ng-blur="softKeyboardExit()" type="text" name="pay-name" tabindex="2" ng-model="order.form.name" class="payment-form-input form-input form-field" placeholder="Name" autocomplete="name" x-autocompletetype="full-name">
 				</div>
 
 				<div class="payment-form-group form-group">
 					<i class="fa fa-envelope-o payment-form-icon form-icon form-field"></i>
-					<input ng-focus="softKeyboard($event);" ng-blur="softKeyboardExit()" type="email" name="pay-email" tabindex="3" ng-model="order.form.email" class="payment-form-input form-input form-field" placeholder="email" autocomplete="email" x-autocompletetype="email">
+					<input ng-focus="softKeyboard($event);" ng-blur="softKeyboardExit()" type="email" name="pay-email" tabindex="3" ng-model="order.form.email" class="payment-form-input form-input form-field" placeholder="E-Mail" autocomplete="email" x-autocompletetype="email">
 				</div>
 
 				<div class="payment-form-group form-group">
 					<i class="fa fa-phone payment-form-icon form-icon form-field"></i>
-					<input ng-focus="softKeyboard($event);" ng-blur="softKeyboardExit()" type="tel" name="pay-phone" tabindex="4" ng-format-phone ng-model="order.form.phone" class="payment-form-input form-input form-field" placeholder="phone number" autocomplete="tel" x-autocompletetype="phone-full">
+					<input ng-focus="softKeyboard($event);" ng-blur="softKeyboardExit()" type="tel" name="pay-phone" tabindex="4" ng-format-phone ng-model="order.form.phone" class="payment-form-input form-input form-field" placeholder="Telefonnummer" autocomplete="tel" x-autocompletetype="phone-full">
 				</div>
 
 				<div class="payment-form-group form-group">
 					<i class="fa fa-map-marker payment-form-icon form-icon form-field"></i>
 					<p class="pickup-info" ng-if="order.form.delivery_type!='delivery'">Pickup from:<br><span ng-bind-html-unsafe="restaurant.address | nl2br"></span></p>
-					<textarea ng-focus="softKeyboard($event);" ng-blur="softKeyboardExit()" ng-autosize ng-if="order.form.delivery_type=='delivery'" class="payment-form-input form-input form-field" ng-model="order.form.address" name="pay-address" id="pay-address" tabindex="5" placeholder="address" autocomplete="street-sddress" x-autocompletetype="street-address"></textarea>
+					<textarea ng-focus="softKeyboard($event);" ng-blur="softKeyboardExit()" ng-autosize ng-if="order.form.delivery_type=='delivery'" class="payment-form-input form-input form-field" ng-model="order.form.address" name="pay-address" id="pay-address" tabindex="5" placeholder="Adresse" autocomplete="street-sddress" x-autocompletetype="street-address"></textarea>
 				</div>
 
 				<div class="payment-form-group form-group">
 
 					<i class="fa fa-bullhorn payment-form-icon form-icon form-field"></i>
-					<textarea ng-focus="softKeyboard($event);" ng-blur="checkGiftCard();softKeyboardExit()" ng-autosize name="notes" ng-blur="" ng-model="order.form.notes" tabindex="6" class="payment-form-input form-input form-field" placeholder="notes / code"></textarea>
+					<textarea ng-focus="softKeyboard($event);" ng-blur="checkGiftCard();softKeyboardExit()" ng-autosize name="notes" ng-blur="" ng-model="order.form.notes" tabindex="6" class="payment-form-input form-input form-field" placeholder="Anmerkungen / Code"></textarea>
 
 					<ng-include src="'/assets/view/restaurant-gift-card.html'"></ng-include>
 			</div>
