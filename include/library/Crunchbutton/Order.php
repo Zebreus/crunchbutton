@@ -115,18 +115,18 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 
 		if( $this->preordered ){
 			if( !$params['deliveryDay'] ){
-				$errors['preorder_day'] = 'Please select the desired delivery day.';
+				$errors['preorder_day'] = 'Bitte gib einen Tag für die Lieferung an';
 			}
 			if( !$params['deliveryHour'] ){
-				$errors['preorder_hour'] = 'Please select the desired delivery hour.';
+				$errors['preorder_hour'] = 'Bitte gib eine Uhrzeit für die Lieferung an.';
 			}
 			if( $this->_date_delivery ){
 				$now = new DateTime( 'now', new DateTimeZone( c::config()->timezone ) );
 				if( $now->format('YmdHis') > $this->_date_delivery->format('YmdHis') ){
-					$errors['preorder_prev_date'] = 'The desired delivery hour should not be in the past.';
+					$errors['preorder_prev_date'] = 'Die Uhrzeit für die Lieferung an darf nicht in der Vergangenheit liegen.';
 				}
 				if(!$this->restaurant()->validatePreOrderDate($this->_date_delivery->format('Y-m-d H:i:s'))){
-					$errors['preorder_date'] = 'Oops, there is something wrong with the desired time!';
+					$errors['preorder_date'] = 'Hmm, da scheint ein Fehler bei der Uhrzeit zu sein!';
 				}
 			}
 		}
@@ -134,7 +134,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		if( $processType == static::PROCESS_TYPE_WEB ){
 			// Check if the restaurant is active #2938
 			if(!$this->restaurant()->active){
-				$errors['inactive'] = 'This restaurant is not accepting orders.';
+				$errors['inactive'] = 'Dieses Restaurant nimmt keine Bestellungen an.';
 			}
 		}
 
@@ -142,7 +142,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 			// Check if the restaurant is active for restaurant order placement
 			// https://github.com/crunchbutton/crunchbutton/issues/3350#issuecomment-48255149
 			if(!$this->restaurant()->active_restaurant_order_placement){
-				$errors['inactive'] = 'This restaurant is not accepting orders.';
+				$errors['inactive'] = 'Dieses Restaurant nimmt keine Bestellungen an.';
 			}
 		}
 
@@ -308,13 +308,13 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 
 		if (!c::user()->id_user) {
 			if (!$params['name']) {
-				$errors['name'] = 'Please enter a name.';
+				$errors['name'] = 'Bitte gib einen Namen ein.';
 			}
 			if (!$params['phone']) {
-				$errors['phone'] = 'Please enter a phone #.';
+				$errors['phone'] = 'Bitte gib eine Telefonnummer ein.';
 			}
 			if (!$params['address'] && $this->delivery_type == 'delivery') {
-				$errors['address'] = 'Please enter an address.';
+				$errors['address'] = 'Bitte gib eine Lieferadresse an.';
 			}
 		} else {
 			if (!$params['address']) {
@@ -341,7 +341,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		}
 
 		if (!$this->restaurant()->open() && !$this->preordered ) {
-			$errors['closed'] = 'This restaurant is closed.';
+			$errors['closed'] = 'Dieses Restaurant ist geschlossen.';
 
 			$time = new DateTime('now', new DateTimeZone($this->restaurant()->timezone));
 			$debug    = [
@@ -360,31 +360,31 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		}
 
 		if (!$this->restaurant()->meetDeliveryMin($this) && $this->delivery_type == 'delivery') {
-			$errors['minimum'] = 'Please meet the delivery minimum of '.$this->restaurant()->delivery_min.'.';
+			$errors['minimum'] = 'Du hast den Mindestbestellwert von '.$this->restaurant()->delivery_min.' noch nicht erreicht.';
 		}
 
 		// check if the restaurant accepts campus cash payment method
 		if( $this->campus_cash ){
 			if( $this->restaurant()->campusCash() ){
 				if( $this->campus_cash && !$params[ 'campusCash' ] ){
-					$errors['campusCash'] = 'Please fill the field '.$this->restaurant()->campusCashName().'.';
+					$errors['campusCash'] = 'Bitte fülle noch das Feld '.$this->restaurant()->campusCashName().' aus.';
 				} else {
 					if( $this->campus_cash ){
 						$this->campusCash = $this->restaurant()->campusCashValidate( $params[ 'campusCash' ] );
 					}
 
 					if( $this->campus_cash && !$this->campusCash ){
-						$errors['campusCashInvalid'] = 'Please enter a valid '.$this->restaurant()->campusCashName().'.';
+						$errors['campusCashInvalid'] = 'Bitte gib eine gültige '.$this->restaurant()->campusCashName().' ein.';
 					}
 				}
 			} else {
-				$errors['payment_method'] = 'Please select a valid payment method.';
+				$errors['payment_method'] = 'Bitte wähle eine gültige Bezahlmethode aus.';
 			}
 		}
 
 		// Check if the food belongs to the restaurant - #7404
 		if ( $food_error ) {
-			$errors['food'] = 'There was an error processing your order. Please reload the page and tray again.';
+			$errors['food'] = 'Beim Verarbeiten deiner Bestellung ist ein Fehler passiert. Am besten lädst du die Seite neu und versuchst es nochmal.';
 			$errors['foodDishes'] = $foodErrorDishes;
 		}
 
@@ -1882,9 +1882,9 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 	public function tellCustomerTheOrderWasCanceled(){
 		$message = Crunchbutton_Message_Sms::greeting( $this->user()->firstName() );
 		if ($this->pay_type == self::PAY_TYPE_CREDIT_CARD) {
-			$message .= "Your order #".$this->id_order." was cancelled and refunded to your card.\n";
+			$message .= "Deine Bestellung #".$this->id_order." wurde abgebrochen und der Betrag wurde auf deine Karte zurückerstattet.\n";
 		} else {
-			$message .= "Your order #".$this->id_order." was cancelled.\n";
+			$message .= "Deine Bestellung #".$this->id_order." wurde abgebrochen.\n";
 		}
 		$message  .= "\nCrunchbutton.com";
 
@@ -2277,7 +2277,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		switch ($type) {
 			case 'selfsms':
 				$msg  = "Crunchbutton.com #".$this->id_order."\n\n";
-				$msg .= "Order confirmed!\n\n";
+				$msg .= "Bestellung bestätigt!\n\n";
 				// #2416
 				if( !$this->delivery_service ){
 					$msg .= "Restaurant Phone: ".$this->restaurant()->phone().".\n";
@@ -2285,7 +2285,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 
 				// #3925
 				if( !$this->restaurant()->formal_relationship ) {
-					$msg .= "DO NOT call the restaurant. If you have any questions about your order, text or call us back directly!\n";
+					$msg .= "Ruf bitte nicht das Restaurant an. Wenn du Fragen zu deiner Bestellung hast, ruf uns bitte direkt an oder schreib uns eine Nachricht.\n";
 					$msg .= "\n";
 				} else {
 					// Removed the delivery estimate #3925
@@ -2293,24 +2293,24 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 
 							$date_delivery = new DateTime( $this->date_delivery, new DateTimeZone( c::config()->timezone ) );
 							$date_delivery->setTimezone(  new DateTimeZone( $this->restaurant()->timezone )  );
-							$msg .= "Your order will arrive around ";
+							$msg .= "Deine Bestellung kommt ungefähr um ";
 							$msg .= $date_delivery->format('h:i a');
-							$msg .= "!\n\n";
+							$msg .= " an!\n\n";
 					} else{
 						if ( $this->delivery_type == 'delivery' && $this->restaurant()->delivery_estimated_time ) {
-							$msg .= "Your order will arrive around ";
+							$msg .= "Deine Bestellung kommt ungefähr um ";
 							$msg .= $this->restaurant()->calc_delivery_estimated_time();
-							$msg .= "!\n\n";
+							$msg .= " an!\n\n";
 						}
 					}
 				}
 
 				if(!Order::hasPlacedPreOrderByPhone($this->phone)){
-					$msg .= "Next time, try scheduling a pre-order for delivery whatever time you want!\n\n";
+					$msg .= "Probier doch beim nächsten mal eine Vorbestellung aus :D\n\n";
 				}
 
 
-				$msg .= "To contact Crunchbutton, text us back.\n\n";
+				$msg .= "Um uns zu erreichen schreib einfach zurück.\n\n";
 				if ($this->pay_type == self::PAY_TYPE_CASH) {
 					$msg .= "Remember to tip!\n\n";
 				}
@@ -2376,14 +2376,14 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 						}
 					}
 					$msg .= $_food . ". ";
-					$msg .= "Subtotal $" . number_format($this->price, 2) . ".";
+					$msg .= "Zwischensumme $" . number_format($this->price, 2) . ".";
 					if ($this->pay_type == 'card' && $this->tip) {
 						$msg .= " Tip: $".$this->tip();
 						$msg .= "(" . number_format( $this->tip() / $this->price * 100, 2 ) . "%).";
 					}
-					$msg .= "\n\nOrder #{$this->id_order}. {$this->name}. {$this->phone}. {$this->address}.";
+					$msg .= "\n\nBestellung #{$this->id_order}. {$this->name}. {$this->phone}. {$this->address}.";
 					if ($this->notes) {
-						$msg .= " \nNOTES: ".$this->notes;
+						$msg .= " \nANMERKUNGEN: ".$this->notes;
 					}
 					break;
 
@@ -2395,12 +2395,12 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 			case 'sms-driver':
 				$spacer = ' / ';
 				$msg = "Crunchbutton #".$this->id_order." \n\n";
-				$msg .= $this->name.' ordered paying by '.$this->pay_type.". \n".$food." \n\nphone: ".preg_replace('/[^\d.]/','',$this->phone).'.';
+				$msg .= $this->name.' bezahlt mit '.$this->pay_type.". \n".$food." \n\nTelefonnummer: ".preg_replace('/[^\d.]/','',$this->phone).'.';
 				if ($this->delivery_type == 'delivery') {
-					$msg .= " \naddress: ".$this->address;
+					$msg .= " \nAdresse: ".$this->address;
 				}
 				if ($this->notes) {
-					$msg .= " \nNOTES: ".$this->notes;
+					$msg .= " \nANMERKUNGEN: ".$this->notes;
 				}
 				$msg .= " \n\nRestaurant: {$this->restaurant()->name} / {$this->restaurant()->phone}";
 				$msg .= " \n\n";
@@ -2409,7 +2409,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 					// remove the tip amount from the notification SMS sent to drivers #5418
 					// $msg .= 'TIP ' . $this->tip() . $spacer;
 				} else if( $this->pay_type == Crunchbutton_Order::PAY_TYPE_CREDIT_CARD && !$this->tip ){
-					$msg .= 'TIP BY CASH' . $spacer;
+					$msg .= 'TRINKGELD MIT BARGELD' . $spacer;
 				} else if( $this->pay_type == Crunchbutton_Order::PAY_TYPE_CASH ){
 					// Driver Text Bug-delete $ amt from cash text msg #3552
 					// $msg .= 'TOTAL ' . $this->final_price . $spacer;
@@ -2772,7 +2772,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 			$action = Crunchbutton_Order_Action::q( 'SELECT * FROM order_action WHERE id_order = ? AND type = ? ORDER BY id_order_action DESC LIMIT 1', [ $this->id_order, Crunchbutton_Order_Action::TICKET_DO_NOT_DELIVERY ] )->get( 0 );
 
 			if( !$action->id_order && $sendMessageToDriver ){
-				$message = "System notification: Sorry, " . $this->restaurant()->name . " order #" . $this->id_order . " from " . $this->name . " was just canceled. Please don't deliver it!";
+				$message = "System Benachrichtigung: Es tut uns Leid, " . $this->restaurant()->name . " Bestellung #" . $this->id_order . " von " . $this->name . " wurde gerade abgebrochen. Bitte nicht zustellen!";
 				Crunchbutton_Support::createNewWarning(  [ 'body' => $message, 'phone' => $driver->phone, 'dont_open_ticket' => true ] );
 				Crunchbutton_Message_Sms::send( [ 'to' => $driver->phone, 'message' => $message, 'reason' => Crunchbutton_Message_Sms::REASON_DRIVER_ORDER_CANCELED ] );
 				$action = new Crunchbutton_Order_Action;
@@ -2869,7 +2869,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		if (!$support && $create) {
 			$support = Crunchbutton_Support::createNewTicket([
 				'id_order' => $this->id_order,
-				'body' => 'Ticket created from admin panel.'
+				'body' => 'Ticket von der Admin Oberfläche erstellt.'
 			]);
 		}
 		return $support;
@@ -2988,7 +2988,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 	// Issue #4262
 	public function sendNativeAppLink(){
 		if( $this->isIPhone() && !$this->hasUserAlreadyOrderedUsingNativeApp() && !$this->wasLinkAlreadySent() ){
-			$message = "Enjoy your food, " . $this->name . ", and, next time, order faster with our app! \nhttp://crunchbutton.com/app";
+			$message = "Genieß dein Essen, " . $this->name . "! Nächstes mal kannst du ja mal unsere App ausprobieren: \nhttp://crunchbutton.com/app";
 			$num = $this->phone;
 			Crunchbutton_Message_Sms::send( [
 				'to' => $num,
@@ -3224,7 +3224,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 					$this->save();
 				}
 			}
-			$message = 'Order #' . $this->id_order . ' already accepted by ' . $admin->name;
+			$message = 'Order #' . $this->id_order . ' wurde schon von ' . $admin->name . ' angenommen.';
 			$this->closeWarningTicket($message);
 		}
 
@@ -3458,9 +3458,9 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 			// Check if the order was rejected and change the message
 			$action = Crunchbutton_Order_Action::q( 'SELECT * FROM order_action WHERE type = ? AND id_order = ?', [Crunchbutton_Order_Action::DELIVERY_REJECTED, $this->id_order]);
 			if( $action->count() > 0 ){
-				$message = $firstName . "You've got a new driver! For order updates, text {$driver->nameAbbr()} at {$driver->phone}";
+				$message = $firstName . "Du hast einen neuen Fahrer! Wegen updates zu deiner Bestellung schreib {$driver->nameAbbr()}: {$driver->phone}";
 			} else {
-				$message = $firstName . "Your driver today is {$driver->nameAbbr()}. For order updates, text {$driver->firstName()} at {$driver->phone}";
+				$message = $firstName . "Dein Fahrer ist {$driver->nameAbbr()}. Wenn du Fragen zur Zustellung hast, schreib {$driver->firstName()}: {$driver->phone}";
 			}
 			Crunchbutton_Message_Sms::send( [ 'to' => $phone, 'message' => $message, 'reason' => Crunchbutton_Message_Sms::REASON_CUSTOMER_DRIVER ] );
 		}
@@ -3560,26 +3560,26 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 			if( $this->pay_type == 'cash' ){
 				$driver = c::user();
 				if( $driver->id_admin && $driver->hasPexCard() ){
-					return 'CASH order. Pay restaurant with your own cash, not PEX.';
+					return 'Barzahlung. Bitte zahle im Restaurant mit deinem Geld und nicht mit PEX';
 				} else {
-					return 'CASH order. Pay restaurant with your own cash.';
+					return 'Barzahlung. Bitte zahle im Restaurant mit deinem Geld.';
 				}
 			} else {
-				return 'Do not pay the restaurant';
+				return 'Du musst nicht im Restaurant bezahlen?';
 			}
 		} else {
 			$driver = c::user();
 			if( $this->pay_type == 'cash' ){
 				if( $driver->id_admin && $driver->hasPexCard() ){
-					return 'CASH order. Pay restaurant with your own cash, not PEX.';
+					return 'Barzahlung. Bitte zahle im Restaurant mit deinem Geld und nicht mit PEX?';
 				} else {
-					return 'CASH order. Pay restaurant with your own cash.';
+					return 'Barzahlung. Bitte zahle im Restaurant mit deinem Geld.';
 				}
 			} else {
 				if( $driver->id_admin && $driver->hasPexCard() ){
-					return 'Pay the restaurant with PEX card';
+					return 'Bitte zahle im Restaurant mit PEX';
 				} else {
-					return 'Pay the restaurant';
+					return 'Bitte zahle im Restaurant';
 				}
 			}
 		}
@@ -3813,11 +3813,11 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 				if( !$order->isAtDeliveryRadius() ){
 
 					if( $order->calcDistance() === false ){
-						$pattern = "%s just placed an order, the system could not calculate delivery radius! Order details: Order %d in the %s community to this address %s. Please double check that this address is close enough to be delivered (if it's just slightly out of range it may be fine), and cancel the order if necessary. Thanks!";
+						$pattern = "%s hat gerade ein Bestellung aufgegeben, aber das System konnte den Lieferradius nicht bestimmen! Bestellungsdaten: Bestellung %d in %s community nach %s. Bitte überprüfe, ob die Adresse nah genug ist um beliefert zu werden. (wenn sie nur ein kleines Stück außerhalb der Reichweite liegt kann es auch ok sein) und brich falls notwendig die Bestellung ab. Danke!";
 						$message = sprintf( $pattern, $order->name, $order->id_order, $order->community()->name, $order->address );
 					} else {
 						$distance = number_format( $order->calcDistance(), 2 ) . ' miles';
-						$pattern = "%s just placed an order out of delivery radius! Distance %s. Order details: Order %d in the %s community to this address %s. Please double check that this address is close enough to be delivered (if it's just slightly out of range it may be fine), and cancel the order if necessary. Thanks!";
+						$pattern = "%s hat gerade ein Bestellung ausserhalb des Liefergebiets aufgegeben! Entfernung %s. Bestellungsdaten: Bestellung %d in %s community nach %s. Bitte überprüfe, ob die Adresse nah genug ist um beliefert zu werden. (wenn sie nur ein kleines Stück außerhalb der Reichweite liegt kann es auch ok sein) und brich falls notwendig die Bestellung ab. Danke!";
 						$message = sprintf( $pattern, $order->name, $distance, $order->id_order, $order->community()->name, $order->address );
 					}
 
@@ -3856,7 +3856,7 @@ class Crunchbutton_Order extends Crunchbutton_Order_Trackchange {
 		return;
 		$order = $this;
 		if( !$order->geomatched && !$order->orderHasGeomatchedTicket() ){
-			$pattern = "%s just did Place Order Anyway! Order details: Order %d in the %s community to this address %s. Please double check that this address is close enough to be delivered (if it's just slightly out of range it may be fine), and cancel the order if necessary. Thanks!";
+			$pattern = "%s hat trotzdem eine Bestellung aufgegeben! Bestellungsdaten: Bestellung %d in %s community nach %s. Bitte überprüfe, ob die Adresse nah genug ist um beliefert zu werden. (wenn sie nur ein kleines Stück außerhalb der Reichweite liegt kann es auch ok sein) und brich falls notwendig die Bestellung ab. Danke!";
 			$message = sprintf( $pattern, $order->name, $order->id_order, $order->community()->name, $order->address );
 			Crunchbutton_Support::createNewWarning( [ 'id_order' => $order->id_order, 'body' => $message ] );
 			$action = new Crunchbutton_Order_Action;
