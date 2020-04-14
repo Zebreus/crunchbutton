@@ -37,7 +37,7 @@ class Crunchbutton_Hour extends Cana_Table_Trackchange {
 		$tomorrow->modify( '+ 1 day' );
 		$isTomorrow = ( !$isToday && $nexOpen->format( 'YmdHis' ) < $tomorrow->format( 'YmdHis' ) );
 
-		$message = 'Usually available at ' . $nexOpen->format( 'g' );
+		$message = 'Normalerweise geöffnet um ' . $nexOpen->format( 'g' );
 		if( $nexOpen->format( 'i' ) != '00' ){
 			$message .= ':' . $nexOpen->format( 'i' );
 		}
@@ -59,9 +59,9 @@ class Crunchbutton_Hour extends Cana_Table_Trackchange {
 			$restaurant->preOrderHours();
 			if(count($restaurant->preOrderHours())){
 				if( $restaurant->preOrderTimeToTime ){
-					$message = 'Pre-order for ' . $restaurant->preOrderTimeToTime . '!';
+					$message = 'Vorbestellen für ' . $restaurant->preOrderTimeToTime . '!';
 				} else {
-					$message .= '. Pre-order now!';
+					$message .= 'Jetzt Vorbestellen!';
 				}
 			}
 
