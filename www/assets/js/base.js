@@ -118,19 +118,21 @@ App.ceil = function(num) {
 App.phone = {
 
 	/**
-	 * Add dashes to the phone number, unifying how phone number looks
+	 * //Add dashes to the phone number, unifying how phone number looks
+	 * Not doing anything, as german phone numbers are harder to format
 	 */
 	format: function(num) {
 		if( num != null ){
-			num = num.replace(/^0|^1/,'');
-			num = num.replace(/[^\d]*/gi,'');
-			num = num.substr(0,10);
+			num = num.replace(/^\+49|0/,'0');
+			//num = num.replace(/[^\d]*/gi,'');
+			//num = num.substr(0,10);
 
-			if (num.length >= 7) {
-				num = num.replace(/(\d{3})(\d{3})(.*)/, "$1-$2-$3");
-			} else if (num.length >= 4) {
-				num = num.replace(/(\d{3})(.*)/, "$1-$2");
-			}
+			//if (num.length >= 7) {
+				//num = num.replace(/(\d{3})(\d{3})(.*)/, "$1-$2-$3");
+			//} else if (num.length >= 4) {
+				//num = num.replace(/(\d{3})(.*)/, "$1-$2");
+			//}
+			
 		}
 		return num;
 	},
@@ -140,12 +142,17 @@ App.phone = {
 			return false;
 		}
 
-		num = num.replace(new RegExp( '-', 'g'), '');
-
-		if (!num || num.length != 10) {
+		num = num.replace( /[^0-9]/g, '' );
+		
+		if (!num || num.length <= 3) {
 			return false;
 		}
 
+		//TODO better test
+		/*
+		if (!num || num.length != 10) {
+			return false;
+		}
 		var
 			nums = num.split(''),
 			prev;
@@ -160,8 +167,10 @@ App.phone = {
 				return true;
 			}
 		}
-
 		return false;
+		*/
+		
+		return true;
 	}
 };
 
