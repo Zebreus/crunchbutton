@@ -425,7 +425,7 @@ class Crunchbutton_Restaurant extends Cana_Table_Trackchange {
 		if (!$category) {
 			$category = new Category;
 			$category->id_restaurant = $this->id_restaurant;
-			$category->name = 'Most Popular';
+			$category->name = 'Empfehlungen';
 			$category->sort = 1;
 			$category->loc = 1;
 			$category->save();
@@ -630,7 +630,7 @@ class Crunchbutton_Restaurant extends Cana_Table_Trackchange {
 		if (!$category) {
 			$category = new Category;
 			$category->id_restaurant = $this->id_restaurant;
-			$category->name = 'Most Popular';
+			$category->name = 'Empfehlungen';
 			$category->sort = 1;
 			$category->loc = 1;
 			$category->save();
@@ -1252,7 +1252,7 @@ class Crunchbutton_Restaurant extends Cana_Table_Trackchange {
 
 			$day = [ 'value' => $now->format( 'Y-m-d' ), 'label' => $label, 'hours' => [] ];
 
-			$day[ 'hours' ][] = [ 'label' => 'Desired Time', 'value' => false ];
+			$day[ 'hours' ][] = [ 'label' => 'Lieferzeit wählen', 'value' => false ];
 			$first_hour_of_day = true;
 
 			foreach( $hours as $hour ){
@@ -1268,7 +1268,7 @@ class Crunchbutton_Restaurant extends Cana_Table_Trackchange {
 					if( $store ){
 
 						if($first_hour_of_day && !$this->delivery_service){
-							$label = 'ASAP after the restaurant opens';
+							$label = 'Sobald wie möglich, nachdem das Restaurant geöffnet hat.';
 						} else {
 							$label = $hour->time_open . ' - ' . $hour->time_close;
 						}
@@ -2433,7 +2433,7 @@ class Crunchbutton_Restaurant extends Cana_Table_Trackchange {
 		}
 		$restaurant->permalink = 'restaurant-' . $id_restaurant;
 		$restaurant->name = $self->name . ' - duplicated';
-		$restaurant->notes_todo = 'Duplicated from ' . $self->name . ' (' . $self->id_restaurant . ')';
+		$restaurant->notes_todo = 'Dupliziert von ' . $self->name . ' (' . $self->id_restaurant . ')';
 		$restaurant->active = 0;
 		$restaurant->open_for_business = 0;
 		$restaurant->save();
