@@ -14,8 +14,8 @@
 
 		<div class="content-padding">
 			<div class="order-tagline"><p>
-				<b>Crunched!&nbsp;</b>
-				Next time, try scheduling a pre-order for whatever time you want!
+				<b>Ist gebongt!&nbsp;</b>
+				Deine Bestellung ist bei uns eingegangen.
 			</p></div>
 		</div>
 
@@ -29,16 +29,11 @@
 				<div ng-hide="account.user.has_auth">
 					<div class="order-buttons">
 						<p>
-							Create an account and earn {{order.reward.points}} points towards a <b>free delivery</b> and reorder your favorite food anywhere, including <a data-ng-href="http://crunchbutton.com">crunchbutton.com</a> and our&nbsp;
-							<span ng-if="!isMobile"><a href="/download">mobile apps</a>.</span>
-							<span ng-if="isMobile">
-								<span ng-if="!isAndroid"><a data-ng-href="https://itunes.apple.com/app/id721780390">iOS App</a>.</span>
-								<span ng-if="isAndroid"><a data-ng-href="https://play.google.com/store/apps/details?id=com.crunchbutton">Android App</a>.</span>
-							</span>
+							Erstell einen Account und verdiene {{order.reward.points}}.
 						</p>
 						<br>
 						<div class="button-pushable">
-							<button class="button lightorange" ng-click="modal.signupOpen();">Create an account</button>
+							<button class="button lightorange" ng-click="modal.signupOpen();">Account erstellen</button>
 						</div>
 						<br />
 					</div>
@@ -49,13 +44,13 @@
 
 					<div class="order-buttons">
 						<p ng-if="account.user.points.free_delivery_message && account.user.points.free_delivery" class="delivery-free order-delivery-free">
-							You have <strong>{{account.user.points.show}}</strong> points! The next delivery fee is on us.
+							Du hast <strong>{{account.user.points.show}}</strong> Punkte! Das nächste mal gehen die Liefergebühren auf uns.
 						</p>
 						<div ng-if="!account.user.points.free_delivery_message">
 							<p class="delivery-free points-earned-message">
-								You just earned <strong>{{order.reward.points}}</strong> points!
+								Du hast gerade <strong>{{order.reward.points}}</strong> Punkte verdien!
 								<span ng-if="!account.user.points.free_delivery_message">
-									<strong> {{account.user.points.free_delivery}}</strong> points gets you a free delivery.
+									Wenn du <strong> {{account.user.points.free_delivery}}</strong> Punkte hast, übernehmen wir einmal deine Liefergebühren.
 								</span>
 							</p>
 						</div>
@@ -71,23 +66,23 @@
 					<div class="hide-desktop button-refer-big">
 						<a href="{{referral.sms}}">
 							<button class="button lightorange">
-								<i class="fa fa-comment"></i>&nbsp;&nbsp;&nbsp;<span>Invite Friends</span>
+								<i class="fa fa-comment"></i>&nbsp;&nbsp;&nbsp;<span>Freunde einladen</span>
 							</button>
 						</a>
 					</div>
 
 					<div class="button-refer-big">
-						<span class="refer-multiply hide-mobile">Double your points by sharing on Facebook</span>
-						<span class="refer-multiply-small hide-desktop">Double your points by sharing on Facebook</span>
+						<span class="refer-multiply hide-mobile">Doppelte Punkte, wenn du die Bestellung auf Facebook teilst</span>
+						<span class="refer-multiply-small hide-desktop">Doppelte Punkte, wenn du die Bestellung auf Facebook teilst</span>
 
 						<button class="button facebook" ng-click="referral.facebook('order');" ng-if="account.user.has_auth && !order.reward.shared.facebook">
-							<i class="fa fa-facebook-square"></i> <span>Share</span>
+							<i class="fa fa-facebook-square"></i> <span>Teilen</span>
 						</button>
 					</div>
 
 					<div class="button-refer-big">
-						<span class="refer-multiply hide-mobile">Triple them by sharing on Twitter.</span>
-						<span class="refer-multiply-small hide-desktop">Triple them by sharing on Twitter</span>
+						<span class="refer-multiply hide-mobile">Dreifache Punkte, wenn du die Bestellung auf Twitter teilst</span>
+						<span class="refer-multiply-small hide-desktop">Dreifache Punkte, wenn du die Bestellung auf Twitter teilst</span>
 						<button class="button twitter" ng-click="referral.twitter('order')" ng-if="account.user.has_auth && !order.reward.shared.twitter">
 							<i class="fa fa-twitter-square"></i> <span>Tweet</span>
 						</button>
@@ -96,17 +91,17 @@
 				<!-- </div> -->
 
 				<div ng-if="order.reward.shared.facebook">
-					Thanks for sharing on Facebook.
+					Danke, fürs Teilen auf Facebook.
 				</div>
 
 				<div ng-if="order.reward.shared.twitter">
-					Thanks for sharing on Twitter.
+					Danke, fürs Teilen auf Twitter.
 				</div>
 				<div class="divider"></div>
 				<br><br>
 				<div class="content-padding">
 					<p class="center-text">
-						Earn a FREE DELIVERY for every new customer you refer with your link!
+						Gratis Liefergebühren für jeden, der mit deinem Link die erste Bestellung tätigt.
 						<br><br>
 					</p>
 				</div>
@@ -124,15 +119,15 @@
 				<div class="order-bubble-wrap">
 					<div class="bubble-tail bubble-tail-green bubble-animated">
 						<div class="text" ng-switch="cherryMessage">
-							<span ng-switch-when="1" class="single-line">Yay! Food!</span>
-							<span ng-switch-when="2" class="single-line">It's on it's way.</span>
-							<span ng-switch-when="3" class="small">Questions? Please contact the restaurant.</span>
-							<span ng-switch-when="4">Feedback? Send us a text.</span>
-							<span ng-switch-when="5">We'd love to hear your thoughts...</span>
-							<span ng-switch-when="6">suggestions, or even complaints!</span>
-							<span ng-switch-when="7">The customer is always right!</span>
+							<span ng-switch-when="1" class="single-line">Yay! Essen!</span>
+							<span ng-switch-when="2" class="single-line">Es ist untewegs.</span>
+							<span ng-switch-when="3" class="small">Fragen? Kontaktiere das Restaurant.</span>
+							<span ng-switch-when="4">Feedback? Schreib uns eine Nachricht.</span>
+							<span ng-switch-when="5">Wir freuen uns, von dir zu hören...</span>
+							<span ng-switch-when="6">Vorschläge oder sogar Beschwerden</span>
+							<span ng-switch-when="7">Wir hören dir zu!</span>
 							<span class="single-line" ng-switch-when="8"><i class="fa fa-heart"></i> <i class="fa fa-heart"></i> <i class="fa fa-heart"></i></span>
-							<span ng-switch-default class="single-line"><b>Sit back &amp relax!</b></span>
+							<span ng-switch-default class="single-line"><b>Lehn dich zurück &amp entspann dich!</b></span>
 						</div>
 						<div class="bubble-tail-spacer"></div>
 					</div>
@@ -149,12 +144,12 @@
 
 		<div class="content-padding">
 			<p class="center-text">
-				For more info about your order, view <a ng-click="receipt()">Order Details</a>.
+				Für mehr Informationen zu deiner Bestellung, kannst du dir die  <a ng-click="receipt()">Bestellungs Details</a> anschauen.
 			</p>
 		</div>
 		<div class="content-padding">
 			<p class="notes-text">
-				If you need to cancel or change details about your order, please text us at <a href="sms:+16467831444">(646) 783-1444</a> within 5 min of ordering for us to be able to issue refunds/make changes.
+				Wenn du deine Bestellung abbrechen oder änder willst, schreib uns an <a href="sms:+16467831444">(646) 783-1444</a> innerhalb von 10 Minuten nach Bestellungseingang, dann schauen wir was wir tun können.
 			</p>
 		</div>
 
