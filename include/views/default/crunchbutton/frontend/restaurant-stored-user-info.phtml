@@ -54,7 +54,7 @@
 		</div>
 		<div class="order-info" ng-if="restaurant.takeout == '1' && order.form.delivery_type=='takeout'">
 			<p class="restaurant-info-address">
-				Pick up from:<br />
+				Abholung bei:<br />
 				<span ng-bind-html-unsafe="restaurant.address | nl2br"></span>
 			</p>
 		</div>
@@ -65,7 +65,7 @@
 				<div class="payment-form-group form-group">
 
 					<i class="fa fa-bullhorn payment-form-icon form-icon form-field"></i>
-					<textarea ng-focus="softKeyboard($event);" ng-blur="checkGiftCard();softKeyboardExit()" ng-autosize name="notes" ng-model="order.form.notes" tabindex="6" class="payment-form-input form-input form-field notes-text-area" placeholder="notes / code"></textarea>
+					<textarea ng-focus="softKeyboard($event);" ng-blur="checkGiftCard();softKeyboardExit()" ng-autosize name="notes" ng-model="order.form.notes" tabindex="6" class="payment-form-input form-input form-field notes-text-area" placeholder="Anmerkungen / Code"></textarea>
 
 					<ng-include src="'/assets/view/restaurant-gift-card.html'"></ng-include>
 		</div>
