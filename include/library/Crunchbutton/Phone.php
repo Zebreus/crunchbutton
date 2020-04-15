@@ -133,7 +133,7 @@ class Crunchbutton_Phone extends Cana_Table {
 			$phone = substr($phone, 1);
 		}
 
-		if (strlen($phone) != 10) {
+		if (strlen($phone) <= 3) {
 			return false;
 		}
 
@@ -152,7 +152,8 @@ class Crunchbutton_Phone extends Cana_Table {
 
 	public static function formatted( $phone ){
 		$phone = preg_replace('/[^\d]*/i','',$phone);
-		return preg_replace('/(\d{3})(\d{3})(.*)/', '\\1-\\2-\\3', $phone);
+		return $phone;
+        //return preg_replace('/(\d{3})(\d{3})(.*)/', '\\1-\\2-\\3', $phone);
 	}
 
 	public static function name($mixed, $returnId = false) {

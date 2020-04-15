@@ -72,7 +72,7 @@ class Controller_api_staff_communitydirector extends Crunchbutton_Controller_Res
 			$this->_error( 'the phone is missing' );
 		}
 
-		if( strlen( $phone ) != 10 ){
+		if( strlen( $phone ) <= 3 ){
 			$this->_error( 'enter a valid phone' );
 		}
 
