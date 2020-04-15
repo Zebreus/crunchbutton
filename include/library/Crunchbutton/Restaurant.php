@@ -1268,7 +1268,7 @@ class Crunchbutton_Restaurant extends Cana_Table_Trackchange {
 					if( $store ){
 
 						if($first_hour_of_day && !$this->delivery_service){
-							$label = 'Sobald wie möglich, nachdem das Restaurant geöffnet hat.';
+							$label = 'Sobald wie möglich.';
 						} else {
 							$label = $hour->time_open . ' - ' . $hour->time_close;
 						}
