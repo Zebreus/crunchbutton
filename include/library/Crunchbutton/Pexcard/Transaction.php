@@ -405,7 +405,11 @@ class Crunchbutton_Pexcard_Transaction extends Crunchbutton_Pexcard_Resource {
 		$max = new DateTime( $dates->max, new DateTimeZone( Crunchbutton_Community_Shift::CB_TIMEZONE ) );
 		$min = new DateTime( $dates->min, new DateTimeZone( Crunchbutton_Community_Shift::CB_TIMEZONE ) );
 
-		return [ 'min' => $min->format( 'M jS Y g:i:s A T' ), 'max' => $max->format( 'M jS Y g:i:s A T' ) ];
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			return [ 'min' => $min->format( 'M jS Y g:i:s A T' ), 'max' => $max->format( 'M jS Y g:i:s A T' ) ];
+		}else{
+			return [ 'min' => $min->format( 'M jS Y G:i:s T' ), 'max' => $max->format( 'M jS Y G:i:s T' ) ];
+		}
 	}
 
 	public function processExpenses( $start, $end, $json = true ){
@@ -476,9 +480,12 @@ class Crunchbutton_Pexcard_Transaction extends Crunchbutton_Pexcard_Resource {
 
 				if( !$transactions_already_added[ $transaction->authTransactionId ] ){
 					$date = new DateTime( $transaction->transactionTime, new DateTimeZone( c::config()->timezone ) );
-					$_transaction = [ 'date' => $date->format( 'M jS Y g:i:s A T' ),
+					$_transaction = [ 'date' => $date->format( 'M jS Y G:i:s T' ),
 														'description' => $transaction->merchantName,
 														'amount' => $transaction->amount ];
+					if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+						$_transaction['date'] = $date->format( 'M jS Y g:i:s A T' );
+					}
 					if( !$json ){
 						$_transaction[ 'id_pexcard_transaction' ] = $transaction->id_pexcard_transaction;
 						$_transaction[ 'date_pst' ] = $transaction->transactionTime_pst;
@@ -521,7 +528,7 @@ class Crunchbutton_Pexcard_Transaction extends Crunchbutton_Pexcard_Resource {
 				$date = $order->date();
 				$total_amount_orders += number_format( $order->amount, 2 );
 
-				$_order = [ 'date' => $date->format( 'M jS Y g:i:s A T' ),
+				$_order = [ 'date' => $date->format( 'M jS Y G:i:s T' ),
 										'_date' => $order->date,
 										'restaurant' => $order->restaurant,
 										'pay_type' => $order->pay_type,
@@ -529,6 +536,9 @@ class Crunchbutton_Pexcard_Transaction extends Crunchbutton_Pexcard_Resource {
 										'refunded' => $order->refunded,
 										'status' => $last[ 'status' ],
 										'amount' => number_format( $order->amount, 2 ) ];
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$_order['date'] = $date->format( 'M jS Y g:i:s A T' );
+				}
 
 				if( !$json ){
 					$_order[ 'should_use' ] = $order->shouldUsePexCard();

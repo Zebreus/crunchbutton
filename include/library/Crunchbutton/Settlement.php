@@ -89,7 +89,13 @@ class Crunchbutton_Settlement extends Cana_Model {
 			$_shift[ 'day' ] = $shift->dateStart()->format( 'Ymd' );
 			$_shift[ 'date_day' ] = $shift->dateStart()->format( 'M jS Y' );
 			$_shift[ 'date_start' ] = $shift->dateStart()->format( 'M jS Y g:i:s A' );
-			$_shift[ 'date_end' ] = $shift->dateEnd()->format( 'M jS Y g:i:s A' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$_shift[ 'date_end' ] = $shift->dateEnd()->format( 'M jS Y g:i:s A' );
+				$_shift[ 'date_start' ] = $shift->dateStart()->format( 'M jS Y g:i:s A' );
+			}else{
+				$_shift[ 'date_end' ] = $shift->dateEnd()->format( 'M jS Y G:i:s' );
+				$_shift[ 'date_start' ] = $shift->dateStart()->format( 'M jS Y G:i:s' );
+			}
 			$_shift[ 'hours' ] = $shift->duration();
 			$_shift[ 'id_admin_shift_assign' ] = $shift->id_admin_shift_assign;
 			$_shift[ 'id_community_shift' ] = $shift->id_community_shift;
@@ -100,7 +106,11 @@ class Crunchbutton_Settlement extends Cana_Model {
 					$payment_info = $schedule_info->payment()->get( 0 );
 					if( $payment_info ){
 						$date = $payment_info->date();
-						$_shift[ 'paid_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $date->format( 'M jS Y g:i:s A' ) ];
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$_shift[ 'paid_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $date->format( 'M jS Y g:i:s A' ) ];
+						}else{
+							$_shift[ 'paid_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $date->format( 'M jS Y G:i:s' ) ];
+						}
 					}
 				}
 			}
@@ -135,13 +145,21 @@ class Crunchbutton_Settlement extends Cana_Model {
 				if( $_order[ 'driver_paid' ] ){
 					$payment_info = Crunchbutton_Order_Transaction::orderPaymentInfoDriver( $_order[ 'id_order' ] );
 					if( $payment_info ){
-						$_order[ 'payment_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $payment_info->date()->format( 'M jS Y g:i:s A' ) ];
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$_order[ 'payment_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $payment_info->date()->format( 'M jS Y g:i:s A' ) ];
+						}else{
+							$_order[ 'payment_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $payment_info->date()->format( 'M jS Y G:i:s' ) ];
+						}
 					}
 				}
 				if( $_order[ 'driver_reimbursed' ] ){
 					$payment_info = Crunchbutton_Order_Transaction::orderReimbursementInfoDriver( $_order[ 'id_order' ] );
 					if( $payment_info ){
-						$_order[ 'reimbursed_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $payment_info->date()->format( 'M jS Y g:i:s A' ) ];
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$_order[ 'reimbursed_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $payment_info->date()->format( 'M jS Y g:i:s A' ) ];
+						}else{
+							$_order[ 'reimbursed_info' ] = [ 'id_payment' => $payment_info->id_payment, 'date' => $payment_info->date()->format( 'M jS Y G:i:s' ) ];
+						}
 					}
 				}
 				$_orders[] = $_order;
@@ -1253,13 +1271,25 @@ class Crunchbutton_Settlement extends Cana_Model {
 				$summary[ 'stripe_id' ] = $payment->stripe_id;
 				$summary[ 'check_id' ] = $payment->check_id;
 				if( $payment->summary_sent_date ){
-					$summary[ 'summary_sent_date' ] = $payment->summary_sent_date()->format( 'M jS Y g:i:s A T' );
+					if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+						$summary[ 'summary_sent_date' ] = $payment->summary_sent_date()->format( 'M jS Y g:i:s A T' );
+					}else{
+						$summary[ 'summary_sent_date' ] = $payment->summary_sent_date()->format( 'M jS Y G:i:s T' );
+					}
 				}
 
-				$summary[ 'payment_date' ] = $payment->date()->format( 'M jS Y g:i:s A T' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$summary[ 'payment_date' ] = $payment->date()->format( 'M jS Y g:i:s A T' );
+				}else{
+					$summary[ 'payment_date' ] = $payment->date()->format( 'M jS Y G:i:s T' );
+				}
 			}
 			if( $schedule->status_date ){
-				$summary[ 'status_date' ] = $schedule->status_date()->format( 'M jS Y g:i:s A T' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$summary[ 'status_date' ] = $schedule->status_date()->format( 'M jS Y g:i:s A T' );
+				}else{
+					$summary[ 'status_date' ] = $schedule->status_date()->format( 'M jS Y G:i:s T' );
+				}
 			}
 			$orders = $schedule->orders();
 			$_orders = [];

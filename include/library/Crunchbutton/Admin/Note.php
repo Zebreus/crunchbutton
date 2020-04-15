@@ -25,7 +25,11 @@ class Crunchbutton_Admin_Note extends Cana_Table {
 		$out[ 'id_admin' ] = $this->id_admin;
 		$out[ 'id_admin_note' ] = $this->id_admin_note;
 		$out[ 'admin' ] = [ 'name' => $this->admin()->name, 'login' => $this->admin()->login ];
-		$out[ 'date' ] = $this->date()->format( 'M jS Y g:i:s A' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+            $out[ 'date' ] = $this->date()->format( 'M jS Y g:i:s A' );
+		}else{
+            $out[ 'date' ] = $this->date()->format( 'M jS Y G:i:s' );
+		}
 		$out[ 'date_utc' ] = Crunchbutton_Util::dateToUnixTimestamp( $this->date() );
 		$out[ 'text' ] = $this->text;
 		$out[ 'added_by' ] = $this->addedBy()->name;

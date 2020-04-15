@@ -530,7 +530,12 @@ class Crunchbutton_User extends Cana_Table {
 					$message .= '" to "' . $this->phone . '"';
 				}
 
-				$message .= '. Check with the customer to see what info should be used for this current order #' . $lastOrder->id_order . ' placed at ' . $lastOrder->date()->format( 'M jS Y g:i:s A' );
+				$message .= '. Check with the customer to see what info should be used for this current order #' . $lastOrder->id_order . ' placed at ';
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$message .= $lastOrder->date()->format( 'M jS Y g:i:s A' );
+				}else{
+					$message .= $lastOrder->date()->format( 'M jS Y G:i:s' );
+				}
 
 				$status = $lastOrder->status()->last();
 

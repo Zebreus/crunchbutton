@@ -81,6 +81,30 @@ services:
                php-fpm"
     hostname: cockpit
     restart: unless-stopped
+
+  log:
+    build: crunchbutton-log/.
+    ports:
+     - "8002:3696"
+    links:
+     - crunchbutton-db-dev
+    environment:
+     - PORT=3696
+     - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
+     - CRUNCHBUTTON_HOST=https://lieferfrass.dev
+    hostname: log
+    restart: unless-stopped
+    
+  event:
+    build: crunchbutton-event/.
+    ports:
+     - "8003:3696"
+    environment:
+     - PORT=3696
+     - COCKPIT_HOST=https://cockpit.lieferfrass.dev
+     - COCKPIT_BETA_HOST=beta.cockpit.lieferfrass.dev
+    hostname: event
+    restart: unless-stopped
   
   crunchbutton-db-dev:
     build: db

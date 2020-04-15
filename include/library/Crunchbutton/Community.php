@@ -214,14 +214,22 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 			$admin = Admin::o( $out[ 'close_all_restaurants_id_admin' ] );
 			$out[ 'close_all_restaurants_admin' ] = $admin->name;
 			$date = new DateTime( $out[ 'close_all_restaurants_date' ], new DateTimeZone( c::config()->timezone ) );
-			$out[ 'close_all_restaurants_date' ] = $date->format( 'M jS Y g:i:s A T' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$out[ 'close_all_restaurants_date' ] = $date->format( 'M jS Y g:i:s A T' );
+			}else{
+				$out[ 'close_all_restaurants_date' ] = $date->format( 'M jS Y G:i:s T' );
+			}
 		}
 
 		if( $out[ 'close_3rd_party_delivery_restaurants_id_admin' ] ){
 			$admin = Admin::o( $out[ 'close_3rd_party_delivery_restaurants_id_admin' ] );
 			$out[ 'close_3rd_party_delivery_restaurants_admin' ] = $admin->name;
 			$date = new DateTime( $out[ 'close_3rd_party_delivery_restaurants_date' ], new DateTimeZone( c::config()->timezone ) );
-			$out[ 'close_3rd_party_delivery_restaurants_date' ] = $date->format( 'M jS Y g:i:s A T' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$out[ 'close_3rd_party_delivery_restaurants_date' ] = $date->format( 'M jS Y g:i:s A T' );
+			}else{
+				$out[ 'close_3rd_party_delivery_restaurants_date' ] = $date->format( 'M jS Y G:i:s T' );
+			}
 		}
 
 		$next_sort = Crunchbutton_Community_Alias::q( 'SELECT MAX(sort) AS sort FROM community_alias WHERE id_community = ' . $this->id_community );
@@ -234,7 +242,11 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 
 		if( $out[ 'dont_warn_till' ] ){
 			$out[ 'dont_warn_till' ] = [ 	'y' => $this->dontWarnTill()->format( 'Y' ), 'm' => $this->dontWarnTill()->format( 'm' ), 'd' => $this->dontWarnTill()->format( 'd' ), 'h' => $this->dontWarnTill()->format( 'H' ), 'i' => $this->dontWarnTill()->format( 'i' ) ];
-			$out[ 'dont_warn_till_formated' ] = $this->dontWarnTill()->format( 'M jS Y g:i:s A T' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$out[ 'dont_warn_till_formated' ] = $this->dontWarnTill()->format( 'M jS Y g:i:s A T' );
+			}else{
+				$out[ 'dont_warn_till_formated' ] = $this->dontWarnTill()->format( 'M jS Y G:i:s T' );
+			}
 			$out[ 'dont_warn_till_enabled' ] = true;
 		} else {
 			$out[ 'dont_warn_till' ] = null;
@@ -243,12 +255,20 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 		if( $out[ 'reopen_at' ] ){
 			$_reopen_at = $this->reopenAt();
 			$out[ 'reopen_at_utc' ] = [ 	'y' => $_reopen_at->format( 'Y' ), 'm' => $_reopen_at->format( 'm' ), 'd' => $_reopen_at->format( 'd' ), 'h' => $_reopen_at->format( 'H' ), 'i' => $_reopen_at->format( 'i' ) ];
-			$out[ 'reopen_at_utc_formated' ] = $_reopen_at->format( 'M jS Y g:i:s A T' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$out[ 'reopen_at_utc_formated' ] = $_reopen_at->format( 'M jS Y g:i:s A T' );
+			}else{
+				$out[ 'reopen_at_utc_formated' ] = $_reopen_at->format( 'M jS Y G:i:s T' );
+			}
 
 
 			$_reopen_at = $this->reopenAt( true );
 			$out[ 'reopen_at' ] = [ 	'y' => $_reopen_at->format( 'Y' ), 'm' => $_reopen_at->format( 'm' ), 'd' => $_reopen_at->format( 'd' ), 'h' => $_reopen_at->format( 'H' ), 'i' => $_reopen_at->format( 'i' ) ];
-			$out[ 'reopen_at_formated' ] = $_reopen_at->format( 'M jS Y g:i:s A T' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$out[ 'reopen_at_formated' ] = $_reopen_at->format( 'M jS Y g:i:s A T' );
+			}else{
+				$out[ 'reopen_at_formated' ] = $_reopen_at->format( 'M jS Y G:i:s T' );
+			}
 			$out[ 'reopen_at_enabled' ] = true;
 
 		} else {
@@ -756,7 +776,11 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 				if( $sortDate ){
 					$output[ 'sort_date' ] = $closed_at->format( 'YmdHis' );
 				}
-				$output[ 'closed_at' ] = $closed_at->format( 'M jS Y g:i:s A T' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$output[ 'closed_at' ] = $closed_at->format( 'M jS Y g:i:s A T' );
+				}else{
+					$output[ 'closed_at' ] = $closed_at->format( 'M jS Y G:i:s T' );
+				}
 				$closed_by = $force_close->admin()->name;
 				if( !$closed_by ){
 					// it probably was closed by auto shutdown
@@ -784,7 +808,11 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 				$output = [];
 				$closed_at = new DateTime( $this->close_all_restaurants_date, new DateTimeZone( c::config()->timezone ) );
 				$output[ 'type' ] = 'Close All Restaurants';
-				$output[ 'closed_at' ] = $closed_at->format( 'M jS Y g:i:s A T' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$output[ 'closed_at' ] = $closed_at->format( 'M jS Y g:i:s A T' );
+				}else{
+					$output[ 'closed_at' ] = $closed_at->format( 'M jS Y G:i:s T' );
+				}
 				if( $sortDate ){
 					$output[ 'sort_date' ] = $closed_at->format( 'YmdHis' );
 				}
@@ -799,7 +827,11 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 				$output = [];
 				if( $this->close_3rd_party_delivery_restaurants_date ){
 					$closed_at = new DateTime( $this->close_3rd_party_delivery_restaurants_date, new DateTimeZone( c::config()->timezone ) );
-					$output[ 'closed_at' ] = $closed_at->format( 'M jS Y g:i:s A T' );
+					if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+						$output[ 'closed_at' ] = $closed_at->format( 'M jS Y g:i:s A T' );
+					}else{
+						$output[ 'closed_at' ] = $closed_at->format( 'M jS Y G:i:s T' );
+					}
 					if( $sortDate ){
 						$output[ 'sort_date' ] = $closed_at->format( 'YmdHis' );
 					}
@@ -993,11 +1025,17 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 							$date_end = $nextShift->dateEnd( $this->timezone );
 
 							$message = 'Next open ';
-							$message .= $date_start->format( 'g' );
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$message .= $date_start->format( 'g' );
+							}else{
+								$message .= $date_start->format( 'G' );
+							}
 							if( $date_start->format( 'i' ) != '00' ){
 								$message .= ':' . $date_start->format( 'i' );
 							}
-							$message .= $date_start->format( 'A' );
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$message .= $date_start->format( 'A' );
+							}
 							$message .= '-';
 
 							$day = clone $nextShift->dateStart( $this->timezone );
@@ -1011,12 +1049,17 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 							if( $lastShift->id_community_shift ){
 								$date_end = $lastShift->dateEnd( $this->timezone );
 							}
-							$message .= $date_end->format( 'g' );
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$message .= $date_end->format( 'g' );
+							}else{
+								$message .= $date_end->format( 'G' );
+							}
 							if( $date_end->format( 'i' ) != '00' ){
 								$message .= ':' . $date_end->format( 'i' );
 							}
-
-							$message .= $date_end->format( 'A' );
+							if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+								$message .= $date_end->format( 'A' );
+							}
 							$message .= ' ';
 							$message .= $date_start->format( 'D' );
 							$message .= '!';
@@ -1072,17 +1115,30 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 			$date_end = $shift->dateEnd( $this->timezone );
 
 			$message = 'open ';
-			$message .= $date_start->format( 'g' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$message .= $date_start->format( 'g' );
+			}else{
+				$message .= $date_start->format( 'G' );
+			}
 			if( $date_start->format( 'i' ) != '00' ){
 				$message .= ':' . $date_start->format( 'i' );
 			}
-			$message .= $date_start->format( 'A' );
-			$message .= '-';
-			$message .= $date_end->format( 'g' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$message .= $date_start->format( 'A' );
+				$message .= '-';
+				$message .= $date_end->format( 'g' );
+			}else{
+				$message .= '-';
+				$message .= $date_end->format( 'G' );
+			}
 			if( $date_end->format( 'i' ) != '00' ){
 				$message .= ':' . $date_end->format( 'i' );
 			}
-			$message .= $date_start->format( 'A D' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$message .= $date_start->format( 'A D' );
+			}else{
+				$message .= $date_start->format( 'D' );
+			}
 			$this->driver_restaurant_name = strtolower( $message );
 			echo $this->driver_restaurant_name;
 			echo "\n";
@@ -1147,11 +1203,18 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 						$date_end = $nextShift->dateEnd( $this->timezone );
 
 						$message = 'Next open ';
-						$message .= $date_start->format( 'g' );
+						
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$message .= $date_start->format( 'g' );
+						}else{
+							$message .= $date_start->format( 'G' );
+						}
 						if( $date_start->format( 'i' ) != '00' ){
 							$message .= ':' . $date_start->format( 'i' );
 						}
-						$message .= $date_start->format( 'A' );
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$message .= $date_start->format( 'A' );
+						}
 						$message .= '-';
 
 						$day = clone $nextShift->dateStart( $this->timezone );
@@ -1165,12 +1228,19 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 						if( $lastShift->id_community_shift ){
 							$date_end = $lastShift->dateEnd( $this->timezone );
 						}
-						$message .= $date_end->format( 'g' );
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$message .= $date_end->format( 'g' );
+						}else{
+							$message .= $date_end->format( 'G' );
+						}
+						
 						if( $date_end->format( 'i' ) != '00' ){
 							$message .= ':' . $date_end->format( 'i' );
 						}
 
-						$message .= $date_end->format( 'A' );
+						if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+							$message .= $date_end->format( 'A' );
+						}
 						$message .= ' ';
 						$message .= $date_start->format( 'D' );
 						$message .= '!';
@@ -1670,12 +1740,22 @@ class Crunchbutton_Community extends Cana_Table_Trackchange {
 
     	$reopenAtMessage->modify('+ ' . ($roundMinutes - $actualMinutes) . ' minutes');
 		$message = 'Next open ';
-		$message .= $reopenAtMessage->format( 'g' );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$message .= $reopenAtMessage->format( 'g' );
+		}else{
+			$message .= $reopenAtMessage->format( 'G' );
+		}
 
 		if( $reopenAtMessage->format( 'i' ) != '00' ){
 			$message .= ':' . $reopenAtMessage->format( 'i' );
 		}
-		$message .= $reopenAtMessage->format( 'A D' );
+		
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$message .= $reopenAtMessage->format( 'A D' );
+		}else{
+			$message .= $reopenAtMessage->format( 'D' );
+		}
+		
 		$message .= '!';
 
 		$reopen_at = new DateTime( 'now', new DateTimeZone(c::config()->timezone));

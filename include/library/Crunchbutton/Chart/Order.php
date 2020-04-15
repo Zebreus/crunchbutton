@@ -796,7 +796,11 @@ public function byDayPerRestaurant( $render = false ){
 				$date = new DateTime( 'now', new DateTimeZone( c::config()->timezone ) );
 				$date->setTime( $item->Hour, 00 );
 				$date->setTimezone( new DateTimeZone( $community->timezone ) );
-				$_hours[ $date->format( 'g a' ) ] = $item->Total;
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$_hours[ $date->format( 'g a' ) ] = $item->Total;
+				}else{
+					$_hours[ $date->format( 'G' ) ] = $item->Total;
+				}
 			}
 
 			$data = [];

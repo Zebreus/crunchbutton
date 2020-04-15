@@ -5,15 +5,17 @@ NGApp.filter( 'formatPhone', function() {
 			if (typeof input == 'number') {
 				input = input.toString();
 			}
-			input = input.replace(/^0|^1/,'');
-			input = input.replace(/[^\d]*/gi,'');
-			input = input.substr(0,10);
+			input = input.replace(/^\+49|0/,'0');
+			
+			//input = input.replace(/^0|^1/,'');
+			//input = input.replace(/[^\d]*/gi,'');
+			//input = input.substr(0,10);
 
-			if (input.length >= 7) {
-				input = input.replace(/(\d{3})(\d{3})(.*)/, "$1-$2-$3");
-			} else if (input.length >= 4) {
-				input = input.replace(/(\d{3})(.*)/, "$1-$2");
-			}
+			//if (input.length >= 7) {
+				//input = input.replace(/(\d{3})(\d{3})(.*)/, "$1-$2-$3");
+			//} else if (input.length >= 4) {
+				//input = input.replace(/(\d{3})(.*)/, "$1-$2");
+			//}
 		}
 		return input;
 	};

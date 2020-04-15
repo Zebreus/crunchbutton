@@ -432,11 +432,17 @@ class Crunchbutton_App extends Cana_App {
 	}
 
 	public function isDownloadable() {
-		if (preg_match('/ios|iphone|ipad|android/i',$_SERVER['HTTP_USER_AGENT']) && !$_COOKIE['_viewmobile2']) {
-			return true;
-		} else {
-			return false;
+		if (preg_match('/ios|iphone|ipad/i',$_SERVER['HTTP_USER_AGENT']) && !$_COOKIE['_viewmobile2'] ) {
+			if (Crunchbutton_Config::getVal( 'recommend_app_to_ios' ) == '1'){
+				return true;
+			}
 		}
+		if (preg_match('/android/i',$_SERVER['HTTP_USER_AGENT']) && !$_COOKIE['_viewmobile2'] ) {
+			if (Crunchbutton_Config::getVal( 'recommend_app_to_android' ) == '1'){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public function getTheme($config = null) {

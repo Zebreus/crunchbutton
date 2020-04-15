@@ -157,9 +157,19 @@ class Crunchbutton_Cron_Log extends Cana_Table {
 
 		// Create a support ticket
 		$last_time_it_started = $cronJob->next_time();
-		$message = 'The cron task "' . $cronJob->description . '" started running at ' . $last_time_it_started->format('M jS Y g:i:s A') . ' and didn\'t finish yet.' . "\n" . 'Please check it, it seems an error has occurred.';
+		$message = 'The cron task "' . $cronJob->description . '" started running at ';
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$message .= $last_time_it_started->format('M jS Y g:i:s A');
+		}else{
+			$message .= $last_time_it_started->format('M jS Y G:i:s');
+		}
+		$message .= ' and didn\'t finish yet.' . "\n" . 'Please check it, it seems an error has occurred.';
 		$message .= "\n";
-		$message .= "Now is:" . $now->format('M jS Y g:i:s A');
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$message .= "Now is:" . $now->format('M jS Y g:i:s A');
+		}else{
+			$message .= "Now is:" . $now->format('M jS Y G:i:s');
+		}
 		$message .= "\n\n";
 		$message .= json_encode( $cronJob->properties() );
 

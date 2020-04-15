@@ -37,11 +37,21 @@ class Crunchbutton_Hour extends Cana_Table_Trackchange {
 		$tomorrow->modify( '+ 1 day' );
 		$isTomorrow = ( !$isToday && $nexOpen->format( 'YmdHis' ) < $tomorrow->format( 'YmdHis' ) );
 
-		$message = 'Normalerweise geöffnet um ' . $nexOpen->format( 'g' );
+		$message = 'Normalerweise geöffnet um ';
+
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$message .= $nexOpen->format( 'g' );
+		}else{
+			$nexOpen->format( 'G' );
+		}
+
 		if( $nexOpen->format( 'i' ) != '00' ){
 			$message .= ':' . $nexOpen->format( 'i' );
 		}
-		$message .= $nexOpen->format( 'A' );
+
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$message .= $nexOpen->format( 'A' );
+		}
 
 		/* change to auto-closed text #7270
 		if( $isToday ){
@@ -69,14 +79,19 @@ class Crunchbutton_Hour extends Cana_Table_Trackchange {
 		} else {
 			$message .= '!';
 		}
-
 		$result = array(	'day' => $nexOpen->format( 'l' ),
-											'hour' => intval( $nexOpen->format( 'h' ) ),
-											'min' => $nexOpen->format( 'i' ),
-											'today' => ( $isToday ? 'Today' : false ),
-											'tomorrow' => ( $isTomorrow ? 'Tomorrow' : false ),
-											'ampm' => strtoupper( $nexOpen->format( 'a' ) ),
-											'message' => $message );
+							'min' => $nexOpen->format( 'i' ),
+							'today' => ( $isToday ? 'Today' : false ),
+							'tomorrow' => ( $isTomorrow ? 'Tomorrow' : false ),
+							'message' => $message );
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			$result['hour'] = intval( $nexOpen->format( 'h' ) );
+			$result['ampm'] = $nexOpen->format( 'A' );
+        }else{
+			$result['hour'] = intval( $nexOpen->format( 'H' ) );
+			$result['ampm'] = '';
+		}
+
 		return $result;
 	}
 
@@ -644,6 +659,7 @@ class Crunchbutton_Hour extends Cana_Table_Trackchange {
 				if( $_from != $_to ){
 					$save = true;
 				}
+				//TODO Probably wrong with 24 hours
 				if( $_from > $_to && $_to == 1200 ){
 					$segment[ 'to' ] = '24:00';
 					$save = true;
@@ -1115,28 +1131,30 @@ class Crunchbutton_Hour extends Cana_Table_Trackchange {
 		return $hours;
 	}
 
-	// Convert hours to PM/AM
+	// Convert hours to PM/AM if appropriate, else just strip minutes, if possible
 	public static function formatTime( $time ){
 		$time = explode( ':', $time );
 		$hour = intval( $time[ 0 ] );
 		$minute = intval( $time[ 1 ] );
 		$ampm = '';
-		switch ( true ) {
-			case ( $hour == 0 || $hour == 24 ):
-				$hour = 12;
-				$ampm = 'am';
-				break;
-			case ( $hour == 12 ):
-				$ampm = 'pm';
-				break;
-			case ( $hour < 12 ):
-				$hour = $hour;
-				$ampm = 'am';
-				break;
-			case ( $hour > 12 ):
-				$hour = ( $hour - 12 );
-				$ampm = 'pm';
-				break;
+		if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+			switch ( true ) {
+				case ( $hour == 0 || $hour == 24 ):
+					$hour = 12;
+					$ampm = 'am';
+					break;
+				case ( $hour == 12 ):
+					$ampm = 'pm';
+					break;
+				case ( $hour < 12 ):
+					$hour = $hour;
+					$ampm = 'am';
+					break;
+				case ( $hour > 12 ):
+					$hour = ( $hour - 12 );
+					$ampm = 'pm';
+					break;
+			}
 		}
 		return $hour . ( ( $minute > 0 ) ? ':' . str_pad( $minute, 2, '0', STR_PAD_LEFT ) : '' ) . $ampm;
 	}

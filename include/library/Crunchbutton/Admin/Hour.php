@@ -68,12 +68,19 @@ class Crunchbutton_Admin_Hour extends Cana_Table {
 
 	public function formatedToSegment( $dateTime ){
 		if( $dateTime ){
-			$hour = $dateTime->format( 'h' );
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$hour = $dateTime->format( 'h' );
+			}else{
+				$hour = $dateTime->format( 'H' );
+			}
 			if( $hour > 12 ){
 				$hour = $hour - 12;
 			}
 			$min = $dateTime->format( 'i' );
-			$ampm = $dateTime->format( 'a' );
+			$ampm = '';
+			if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+				$ampm = $dateTime->format( 'a' );
+			}
 			return intval( $hour ) . ( intval( $min ) > 0 ? ':' . intval( $min ) : '' ) . ' ' . $ampm ;
 		}
 	}

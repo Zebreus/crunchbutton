@@ -1281,9 +1281,17 @@ class Crunchbutton_Support extends Cana_Table_Trackchange {
 				$date = $message->date();
 				$date->setTimezone( new DateTimeZone( Crunchbutton_Community_Shift::CB_TIMEZONE ) );
 
-				$date = $message->date()->format( 'g:i a' );
+				if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+					$date = $message->date()->format( 'g:i a' );
+				}else{
+					$date = $message->date()->format( 'G:i' );
+				}
 				if( !$data[ 'date' ] ){
-					$data[ 'date' ]	= $message->date()->format( 'M jS g:i a' );
+					if (Crunchbutton_Config::getVal( 'time_use_12_hours' ) == '1'){
+						$data[ 'date' ]	= $message->date()->format( 'M jS g:i a' );
+					}else{
+						$data[ 'date' ]	= $message->date()->format( 'M jS G:i' );
+					}
 				}
 
 				if( $_firstMessageDate && !$_secondMessageDate ){
