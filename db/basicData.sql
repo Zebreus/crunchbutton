@@ -360,7 +360,9 @@ VALUES
 	(284,NULL,'order_ticket_radius','1',0),
 	(285,NULL,'order_ticket_geo',NULL,0),
     (286,NULL,'time_use_12_hours','0',0),
-    (286,NULL,'language_iso_code','de',0)
+    (287,NULL,'language_iso_code','de',0),
+    (288,NULL,'recommend_app_to_android','1',0),
+    (289,NULL,'recommend_app_to_ios','1',0)
     ON DUPLICATE KEY UPDATE
     	`id_site` = values(`id_site`) ,
         `key` = values(`key`) ,
