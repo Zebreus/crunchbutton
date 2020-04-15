@@ -45,14 +45,6 @@
 					</tr>
 				</table>
 			</li>
-			<li ng-if="account.user.id_user" ng-click="navigation.link('/free-food', 'instant', true)" ng-class="{'nav-active': (navigation.page == 'free-food')}">
-				<table cellpadding="0" cellspacing="0" class="side-menu-wrap">
-					<tr>
-						<td class="side-menu-icon"><i class="fa fa-star"></i></td>
-						<td class="side-menu-label">Gratis Essen</a></td>
-					</tr>
-				</table>
-			</li>
 			<li ng-click="navigation.link('/work', 'instant', true)" ng-class="{'nav-active': (navigation.page == 'work')}">
 				<table cellpadding="0" cellspacing="0" class="side-menu-wrap">
 					<tr>
@@ -189,8 +181,8 @@
 				<p>
 					Knopf drücken, Essen bekommen. Wir bringen dein Lieblingsrestaurant direkt an deine Haustür.
 					<br><br>
-					Schreib uns eine Mail: <a href="mailto:{{hello}}">{{hello}}</a><br>
-					Schreib uns eine SMS: <a href="tel:+1{{textUs}}">{{textUsFormatted}}</a>
+					Schreib uns eine Mail: <a href="mailto:obernburgisstbunt@gmail.com">obernburgisstbunt@gmail.com</a><br>
+					Ruf uns an: <a href="tel:+4915253985136">(+49) 1525 3985136</a>
 				</p>
 
 				<? if (!$this->export) : ?>
@@ -210,11 +202,7 @@
 			<div class="footer-column-info">
 				<ul>
 					<li><b>Information</b></li>
-					<li><a href="/about">Über uns</a></li>
-					<li><a href="/owners">Restaurant anmelden</a></li>
-					<li><a href="/work">Arbeite mit uns</a></li>
 					<li><a href="/help">Hilfe &amp; FAQ</a></li>
-					<li><a href="/free-food">Gratis Essen</a></li>
 				</ul>
 			</div>
 			<div ng-include="'/assets/view/quote.html'"></div>
@@ -236,12 +224,9 @@
 			<a href="http://www.linkedin.com/company/crunchbutton" target="_blank"><i class="fa fa-linkedin"></i></a>
 		</div>
 
-		<div class="footer-download">
-			<a href="/download"><div class="app-store"></div></a>
-			<a href="/download"><div class="play-store"></div></a>
-		</div>
 		<div class="divider"></div>
-		<div class="copyright">&copy <?=date('Y')?> <a href="/">Crunchbutton</a></div>
+		<div class="copyright">&copy <?=date('Y')?> <a href="https://github.com/crunchbutton/crunchbutton">Crunchbutton</a></div>
+        <div class="Sourcecode">&copy <?=date('Y')?> <a href="https://github.com/Zebreus/crunchbutton">Crunchbutton</a></div>
 		<div class="divider"></div>
 		<? /*
 		<span ng-controller="BottomCtrl">

@@ -299,8 +299,6 @@ VALUES
 	(209,NULL,'restaurant-awesome','_KEY_',0),
 	(210,NULL,'pex_business_card','2673',0),
 	(212,NULL,'blocked-customer-message','Oops, something bad happened!',0),
-	(215,NULL,'menu_item_1_label','Free Food',1),
-	(218,NULL,'menu_item_1_url','/free-food',1),
 	(221,2,'cockpit-min-app-version','1.1.7',1),
 	(224,1,'apple-pay','0',1),
 	(225,NULL,'david-is-awesome','_KEY_',0),
