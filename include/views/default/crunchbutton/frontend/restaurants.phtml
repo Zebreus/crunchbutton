@@ -38,7 +38,7 @@
 						<span ng-switch-when="12">Und dem besten Essen!</span>
 						<span class="single-line" ng-switch-when="13"><i class="fa fa-heart"></i> <i class="fa fa-heart"></i> <i class="fa fa-heart"></i></span>
 						<span ng-switch-default class="restaurants-push-tagline">
-							<span class="single-line" class="hide-desktop">Lass die Essen liefern!</span>
+							<span class="single-line" class="hide-desktop">Lass dir Essen liefern!</span>
 							<span class="hide-mobile">Wähle ein <br><b>Restaurant</b></span>
 						</span>
 
@@ -61,13 +61,12 @@
 							<span ng-if="community_closed" class="small">
 								{{community_closed}}
 							</span>
-							<span ng-if="!community_closed && !openSoon"><b>Wahhhhhh!!!</b><br>Keine Lieferung verfügbar</span>
-							<span ng-if="!community_closed && openSoon">Lieferung bald verfügbar!!</span>
+							<span ng-if="!community_closed">Du kannst jetzt Essen vorbestellen.</span>
 						</span>
 					</div>
 					<div class="bubble-tail-spacer"></div>
 				</div>
-				<div class="restaurants-orange restaurants-orange-sad" ng-instant="pushMessage = (pushMessage > 6 ? 0 : (pushMessage + 1))" instant-pass-thru></div>
+				<div class="restaurants-orange" ng-instant="pushMessage = (pushMessage > 6 ? 0 : (pushMessage + 1))" instant-pass-thru></div>
 			</div>
 
 			<div class="divider"></div>
