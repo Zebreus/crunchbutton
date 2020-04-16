@@ -1240,7 +1240,7 @@ class Crunchbutton_Restaurant extends Cana_Table_Trackchange {
 		$today = new DateTime( 'now', new DateTimeZone( c::config()->timezone ) );
 		$today->setTimezone( new DateTimeZone( $this->timezone ) );
 
-		for( $i = 1; $i <= 6; $i++ ){
+		for( $i = 1; $i <= 10; $i++ ){
 
 			$label = $now->format( 'D M d' );
 			if( $i == 1 ){
