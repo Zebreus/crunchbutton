@@ -13,7 +13,7 @@ CA_NAME = crunchbuttonLocalCA
 CA_KEY = $(CERTS_DIR)/$(CA_NAME).key
 CA_CRT = $(CERTS_DIR)/$(CA_NAME).crt
 CA_ORGANSIATION = Crunchbutton local
-HOSTS = $(CRUNCHBUTTON_HOST) $(COCKPIT_HOST) $(COCKPIT_BETA_HOST) $(EVENT_HOST) $(LOG_HOST)
+HOSTS = $(CRUNCHBUTTON_HOST) $(COCKPIT_HOST) $(COCKPIT_BETA_HOST) $(EVENT_HOST) $(LOG_HOST)  $(PHPMYADMIN_HOST)
 HOST_KEYS = $(addsuffix .key, $(addprefix $(CERTS_DIR)/, $(HOSTS)))
 HOST_CERTIFICATES = $(addsuffix .crt, $(addprefix $(CERTS_DIR)/, $(HOSTS)))
 
