@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y \
 #     && docker-php-ext-install redis # \
 #     && docker-php-source delete
 
+ADD conf/fpm.conf /usr/local/etc/php-fpm.d/www.conf
 ADD conf/nginx.docker.conf /etc/nginx/sites-available/default
 RUN echo "cgi.fix_pathinfo = 0;" >> /usr/local/etc/php/conf.d/fix_pathinfo.ini
 #RUN echo "listen = /var/run/php5-fpm.sock" >> /usr/local/etc/php-fpm.conf

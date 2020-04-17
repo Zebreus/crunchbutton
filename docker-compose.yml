@@ -10,12 +10,15 @@ services:
     links:
      - crunchbutton-db-dev
     environment:
+     - VIRTUAL_HOST=${CRUNCHBUTTON_HOST}
+     - VIRTUAL_PORT=80
+     - VIRTUAL_PROTO=http
 #     - DEBUG=1
      - COMPOSE=1
      - ENV=DOCKER
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
-     - HOSTNAME=lieferfrass.dev
-     - COCKPIT_HOSTNAME=cockpit.lieferfrass.dev
+     - HOSTNAME=${CRUNCHBUTTON_HOST}
+     - COCKPIT_HOSTNAME=${COCKPIT_HOST}
      - GOOGLE_MAPS_API_KEY=AIzaSyDNJ0f3yxbeksuiQh0iG1_drBO1Mmhg_oo
     cap_add:
      - SYS_ADMIN
@@ -30,7 +33,7 @@ services:
                find /etc/nginx -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
                find /app -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
                find /etc/nginx -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
-               sleep 65 &&
+               sleep 60 &&
                cd /app &&
                bash build.sh &&
                bash cli/build.sh &&
@@ -48,6 +51,9 @@ services:
     links:
      - crunchbutton-db-dev
     environment:
+     - VIRTUAL_HOST=${COCKPIT_HOST}
+     - VIRTUAL_PORT=80
+     - VIRTUAL_PROTO=http
 #     - DEBUG=1
      - COMPOSE=1
      - ENV=DOCKER
@@ -56,8 +62,8 @@ services:
      - ADMIN_PASSWORD=admin
      - ADMIN_PHONE=12345
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
-     - HOSTNAME=lieferfrass.dev
-     - COCKPIT_HOSTNAME=cockpit.lieferfrass.dev
+     - HOSTNAME=${CRUNCHBUTTON_HOST}
+     - COCKPIT_HOSTNAME=${COCKPIT_HOST}
      - GOOGLE_MAPS_API_KEY=AIzaSyDNJ0f3yxbeksuiQh0iG1_drBO1Mmhg_oo
     cap_add:
      - SYS_ADMIN
@@ -89,9 +95,12 @@ services:
     links:
      - crunchbutton-db-dev
     environment:
+     - VIRTUAL_HOST=${LOG_HOST}
+     - VIRTUAL_PORT=3696
+     - VIRTUAL_PROTO=http
      - PORT=3696
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
-     - CRUNCHBUTTON_HOST=https://lieferfrass.dev
+     - CRUNCHBUTTON_HOST=https://${CRUNCHBUTTON_HOST}
     hostname: log
     restart: unless-stopped
     
@@ -100,14 +109,19 @@ services:
     ports:
      - "8003:3696"
     environment:
+     - VIRTUAL_HOST=${EVENT_HOST}
+     - VIRTUAL_PORT=3696
+     - VIRTUAL_PROTO=http
      - PORT=3696
-     - COCKPIT_HOST=https://cockpit.lieferfrass.dev
-     - COCKPIT_BETA_HOST=beta.cockpit.lieferfrass.dev
+     - COCKPIT_HOST=https://${COCKPIT_HOST}
+     - COCKPIT_BETA_HOST=${COCKPIT_BETA_HOST}
     hostname: event
     restart: unless-stopped
   
   crunchbutton-db-dev:
     build: db
+    volumes:
+     - db-data:/var/lib/mysql
     environment:
      - MYSQL_ROOT_PASSWORD=root
      - MYSQL_ROOT_USER=root
@@ -118,3 +132,27 @@ services:
      - "3306:3306"
     hostname: crunchbutton-db-dev
     restart: unless-stopped
+    
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+     - VIRTUAL_HOST=${PHPMYADMIN_HOST}
+     - VIRTUAL_PORT=80
+     - VIRTUAL_PROTO=HTTP
+     - PMA_HOST=crunchbutton-db-dev
+    depends_on:
+     - crunchbutton-db-dev
+    restart: unless-stopped
+    
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs
+    restart: unless-stopped
+
+volumes:
+  db-data:
