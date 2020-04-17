@@ -18,9 +18,9 @@ HOST_KEYS = $(addsuffix .key, $(addprefix $(CERTS_DIR)/, $(HOSTS)))
 HOST_CERTIFICATES = $(addsuffix .crt, $(addprefix $(CERTS_DIR)/, $(HOSTS)))
 
 help:
-	echo "Use \"sudo make install\" to prepare your development environment."
-	echo "Use \"sudo make uninstall\" to remove the CA and the hosts."
-	echo "Use \"sudo make up\" to start all docker containers."
+	echo "Use \"make install\" to prepare your development environment."
+	echo "Use \"make uninstall\" to remove the CA and the hosts."
+	echo "Use \"make up\" to start all docker containers."
 
 all: install up
 
@@ -42,19 +42,19 @@ down:
 
 install-hostnames:
 	echo "Adding hostnames set in $(COMPOSE_ENV_FILE) to /etc/hosts."
-	echo "127.0.0.1       $(HOSTS)" >> /etc/hosts
-	echo "127.0.0.1       $(COCKPIT_HOST)" >> /etc/hosts
-	echo "127.0.0.1       $(LOG_HOST)" >> /etc/hosts
-	echo "127.0.0.1       $(EVENT_HOST)" >> /etc/hosts
-	echo "127.0.0.1       $(COCKPIT_BETA_HOST)" >> /etc/hosts
+	echo "127.0.0.1       $(HOSTS)" | sudo tee -a /etc/hosts
+	echo "127.0.0.1       $(COCKPIT_HOST)" | sudo tee -a /etc/hosts
+	echo "127.0.0.1       $(LOG_HOST)" | sudo tee -a /etc/hosts
+	echo "127.0.0.1       $(EVENT_HOST)" | sudo tee -a /etc/hosts
+	echo "127.0.0.1       $(COCKPIT_BETA_HOST)" | sudo tee -a /etc/hosts
 
 uninstall-hostnames:
 	echo "Remove hostnames set in $(COMPOSE_ENV_FILE) from /etc/hosts."
-	sed -i '/127.0.0.1       $(CRUNCHBUTTON_HOST)/d' /etc/hosts
-	sed -i '/127.0.0.1       $(COCKPIT_HOST)/d' /etc/hosts
-	sed -i '/127.0.0.1       $(LOG_HOST)/d' /etc/hosts
-	sed -i '/127.0.0.1       $(EVENT_HOST)/d' /etc/hosts
-	sed -i '/127.0.0.1       $(COCKPIT_BETA_HOST)/d' /etc/hosts
+	sudo sed -i '/127.0.0.1       $(CRUNCHBUTTON_HOST)/d' /etc/hosts
+	sudo sed -i '/127.0.0.1       $(COCKPIT_HOST)/d' /etc/hosts
+	sudo sed -i '/127.0.0.1       $(LOG_HOST)/d' /etc/hosts
+	sudo sed -i '/127.0.0.1       $(EVENT_HOST)/d' /etc/hosts
+	sudo sed -i '/127.0.0.1       $(COCKPIT_BETA_HOST)/d' /etc/hosts
 
 generate-certs: $(HOST_CERTIFICATES) $(HOST_KEYS)
 	echo "Generated CA certificate and certificates for all the hosts."
@@ -79,10 +79,10 @@ $(CERTS_DIR)/%.csr : $(CERTS_DIR)/%.key | $(CERTS_DIR)
 $(CERTS_DIR)/%.key : | $(CERTS_DIR)
 	openssl genrsa -out $@ 2048
 
-install-ca:
-	cp $(CA_CRT) /etc/ca-certificates/trust-source/anchors/$(CA_NAME).crt
-	trust extract-compat
+install-ca: $(CA_CRT)
+	sudo cp $(CA_CRT) /etc/ca-certificates/trust-source/anchors/$(CA_NAME).crt
+	sudo trust extract-compat
 
 uninstall-ca:
-	- rm /etc/ca-certificates/trust-source/anchors/$(CA_NAME).crt
-	trust extract-compat
+	- sudo rm /etc/ca-certificates/trust-source/anchors/$(CA_NAME).crt
+	sudo trust extract-compat
