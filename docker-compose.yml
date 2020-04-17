@@ -10,6 +10,9 @@ services:
     links:
      - crunchbutton-db-dev
     environment:
+     - VIRTUAL_HOST=${CRUNCHBUTTON_HOST}
+     - VIRTUAL_PORT=80
+     - VIRTUAL_PROTO=http
 #     - DEBUG=1
      - COMPOSE=1
      - ENV=DOCKER
@@ -30,7 +33,7 @@ services:
                find /etc/nginx -type f -exec sed -i -e "s/cockpit.la/$${COCKPIT_HOSTNAME}/g" {} \; &&
                find /app -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
                find /etc/nginx -type f -exec sed -i -e "s/crunchbutton.com/$${HOSTNAME}/g" {} \; &&
-               sleep 65 &&
+               sleep 60 &&
                cd /app &&
                bash build.sh &&
                bash cli/build.sh &&
@@ -48,6 +51,9 @@ services:
     links:
      - crunchbutton-db-dev
     environment:
+     - VIRTUAL_HOST=${COCKPIT_HOST}
+     - VIRTUAL_PORT=80
+     - VIRTUAL_PROTO=http
 #     - DEBUG=1
      - COMPOSE=1
      - ENV=DOCKER
@@ -89,6 +95,9 @@ services:
     links:
      - crunchbutton-db-dev
     environment:
+     - VIRTUAL_HOST=${LOG_HOST}
+     - VIRTUAL_PORT=3696
+     - VIRTUAL_PROTO=http
      - PORT=3696
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
      - CRUNCHBUTTON_HOST=https://${CRUNCHBUTTON_HOST}
@@ -100,6 +109,9 @@ services:
     ports:
      - "8003:3696"
     environment:
+     - VIRTUAL_HOST=${EVENT_HOST}
+     - VIRTUAL_PORT=3696
+     - VIRTUAL_PROTO=http
      - PORT=3696
      - COCKPIT_HOST=https://${COCKPIT_HOST}
      - COCKPIT_BETA_HOST=${COCKPIT_BETA_HOST}
@@ -118,3 +130,12 @@ services:
      - "3306:3306"
     hostname: crunchbutton-db-dev
     restart: unless-stopped
+    
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs
