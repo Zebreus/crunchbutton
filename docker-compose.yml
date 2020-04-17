@@ -14,8 +14,8 @@ services:
      - COMPOSE=1
      - ENV=DOCKER
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
-     - HOSTNAME=lieferfrass.dev
-     - COCKPIT_HOSTNAME=cockpit.lieferfrass.dev
+     - HOSTNAME=${CRUNCHBUTTON_HOST}
+     - COCKPIT_HOSTNAME=${COCKPIT_HOST}
      - GOOGLE_MAPS_API_KEY=AIzaSyDNJ0f3yxbeksuiQh0iG1_drBO1Mmhg_oo
     cap_add:
      - SYS_ADMIN
@@ -56,8 +56,8 @@ services:
      - ADMIN_PASSWORD=admin
      - ADMIN_PHONE=12345
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
-     - HOSTNAME=lieferfrass.dev
-     - COCKPIT_HOSTNAME=cockpit.lieferfrass.dev
+     - HOSTNAME=${CRUNCHBUTTON_HOST}
+     - COCKPIT_HOSTNAME=${COCKPIT_HOST}
      - GOOGLE_MAPS_API_KEY=AIzaSyDNJ0f3yxbeksuiQh0iG1_drBO1Mmhg_oo
     cap_add:
      - SYS_ADMIN
@@ -91,7 +91,7 @@ services:
     environment:
      - PORT=3696
      - DATABASE_URL=mysql://root:root@crunchbutton-db-dev:3306/crunchbutton
-     - CRUNCHBUTTON_HOST=https://lieferfrass.dev
+     - CRUNCHBUTTON_HOST=https://${CRUNCHBUTTON_HOST}
     hostname: log
     restart: unless-stopped
     
@@ -101,8 +101,8 @@ services:
      - "8003:3696"
     environment:
      - PORT=3696
-     - COCKPIT_HOST=https://cockpit.lieferfrass.dev
-     - COCKPIT_BETA_HOST=beta.cockpit.lieferfrass.dev
+     - COCKPIT_HOST=https://${COCKPIT_HOST}
+     - COCKPIT_BETA_HOST=${COCKPIT_BETA_HOST}
     hostname: event
     restart: unless-stopped
   
